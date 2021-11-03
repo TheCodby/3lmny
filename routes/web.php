@@ -42,4 +42,3 @@ Route::middleware(['auth'])->group(function () {
 	});
 });
 Route::get('/Materials', MaterialsController::class)->name('materials');
-Route::get('/Materials/{id}', [MaterialsController::class, 'showMaterial'])->name('materials.show');
