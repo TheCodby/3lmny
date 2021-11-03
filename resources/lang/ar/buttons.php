@@ -18,4 +18,5 @@ return [
 	'browse' => 'تصفح',
 	'donate' => 'تبرع',
 	'joinnow' => '! إنضم الآن',
+    'materials' => 'المواد',
 ];

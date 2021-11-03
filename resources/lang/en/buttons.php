@@ -18,4 +18,5 @@ return [
 	'browse' => 'browse',
 	'donate' => 'donate',
 	'joinnow' => 'Join Now!',
+    'materials' => 'Materials',
 ];

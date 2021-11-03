@@ -18,7 +18,7 @@
 							<select name='type' id='type' class="form-select" aria-label="All">
 							  <option selected>Choose Type</option>
 							  @foreach($types as $type)
-							  <option value="{{$type->id}}">{{$type->name}}</option>
+							  	<option value="{{$type->id}}">{{$type->name}}</option>
 							  @endforeach
 							</select>
 						</div>
@@ -36,7 +36,7 @@
 						</div>
 						<div class="col-6">
 							<label for="keywords2" class="form-label">Keywords</label>
-							<input type="text" name='keywords2' id="keywords2" class="form-control">
+							<input type="text" name='keywords' id="keywords2" class="form-control">
 						</div>
 						<div class="form-group row">
 							<div class="col-12">

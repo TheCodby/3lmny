@@ -24,16 +24,16 @@
 			<div class='card p-2 mb-5'>
 				<ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
 				  <li class="nav-item" role="presentation">
-					<button class="nav-link active" id="analysis-tab" data-bs-toggle="tab" data-bs-target="#analysis" type="button" role="tab" aria-controls="analysis" aria-selected="true">Analysis</button>
+					<button class="nav-link active" id="analysis-tab" data-bs-toggle="tab" data-bs-target="#analysis" type="button" role="tab" aria-controls="analysis" aria-selected="true"><i class="fas fa-chart-line"></i> Analysis</button>
 				  </li>
 				  <li class="nav-item" role="presentation">
-					<button class="nav-link" id="materials-tab" data-bs-toggle="tab" data-bs-target="#materials" type="button" role="tab" aria-controls="materials" aria-selected="true">Materials <span class="badge bg-primary rounded-pill">1</span></button>
+					<button class="nav-link" id="materials-tab" data-bs-toggle="tab" data-bs-target="#materials" type="button" role="tab" aria-controls="materials" aria-selected="true"><i class="fas fa-book"></i> Materials <span class="badge bg-primary rounded-pill">1</span></button>
 				  </li>
 				  <li class="nav-item" role="presentation">
-					<button class="nav-link" id="users-tab" data-bs-toggle="tab" data-bs-target="#users" type="button" role="tab" aria-controls="users" aria-selected="true">Users <span class="badge bg-primary rounded-pill">1</span></button>
+					<button class="nav-link" id="users-tab" data-bs-toggle="tab" data-bs-target="#users" type="button" role="tab" aria-controls="users" aria-selected="true"><i class="fas fa-users"></i> Users <span class="badge bg-primary rounded-pill">1</span></button>
 				  </li>
 				  <li class="nav-item" role="presentation">
-					<button class="nav-link" id="suggestions-tab" data-bs-toggle="tab" data-bs-target="#suggestions" type="button" role="tab" aria-controls="suggestions" aria-selected="true">Suggestions <span class="badge bg-primary rounded-pill">1</span></button>
+					<button class="nav-link" id="suggestions-tab" data-bs-toggle="tab" data-bs-target="#suggestions" type="button" role="tab" aria-controls="suggestions" aria-selected="true"><i class="fas fa-brain"></i> Suggestions <span class="badge bg-primary rounded-pill">1</span></button>
 				  </li>
 				</ul>
 				<div class='card-body'>

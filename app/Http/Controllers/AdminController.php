@@ -23,7 +23,9 @@ class AdminController extends Controller
 	public function AddMaterial(Request $request)
 	{
 		$validator = Validator::make($request->all(), [
-			'subject' => 'required|string',
+			'subject' => 'required|string|max:30',
+			'description' => 'required|string|max:250',
+			'url' => 'required|string',
 			'type' => 'required|integer',
 			'level' => 'required|integer',
 			'keywords' => 'nullable|string',
@@ -37,7 +39,7 @@ class AdminController extends Controller
 		}
 		$keywords = explode(',', $request->keywords);
 		$keywords = json_encode($keywords);
-		$data = request(['subject', 'type', 'level']);
+		$data = request(['subject', 'description', 'url', 'type', 'level']);
 		$data['keywords'] = $keywords;
 		$material = Material::create($data);
 		if($material)

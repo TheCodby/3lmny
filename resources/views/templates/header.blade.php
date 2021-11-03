@@ -49,9 +49,9 @@
 						<i class="fas fa-user-circle"></i> {{ Auth::user()->username }}
 					  </a>
 					@if(app()->getLocale() == 'ar')
-						<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+						<ul class="dropdown-menu" style="position:absolute;" aria-labelledby="dropdownMenuLink">
 					@else
-						<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
+						<ul class="dropdown-menu dropdown-menu-end" style="position:absolute;" aria-labelledby="dropdownMenuLink">
 					@endif
 						<li><a class="dropdown-item" href="#">Account</a></li>
 						<li><a class="dropdown-item" href="#">Settings</a></li>
@@ -68,7 +68,7 @@
 				@guest
 					<li class="nav-item"><a type="button" class="btn btn-primary navbar-btn menu-item" href="{{ route('login') }}"><i class="fas fa-user"></i> {{ ucfirst(__('buttons.login')) }}</a></li>
 				@endguest
-				<li class="nav-item"><a type="button" href="{{ route('materials') }}" class="btn btn-outline-primary navbar-btn menu-item d-none d-sm-block"><i class="fas fa-search"></i> {{ ucfirst(__('buttons.browse')) }}</a></li>
+				<li class="nav-item"><a type="button" href="{{ route('materials') }}" class="btn btn-outline-primary navbar-btn menu-item d-none d-sm-block"><i class="fas fa-book"></i> {{ ucfirst(__('buttons.materials')) }}</a></li>
 				<li class="nav-item"><a type="button" class="btn btn-gold navbar-btn menu-item d-none d-sm-block"><i class="fas fa-hand-holding-usd"></i> {{ ucfirst(__('buttons.donate')) }}</a></li>
 			</ul>
 		</div>
