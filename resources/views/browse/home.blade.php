@@ -30,10 +30,9 @@
 								<label for="basic-url" class="form-label">Level</label>
 								<select class="form-select" aria-label="All">
 									<option selected>All</option>
-									<option value="1">Primary education</option>
-									<option value="2">Middle education</option>
-									<option value="3">High school</option>
-									<option value="4">College education</option>
+										@foreach($levels as $level)
+											<option value="{{$level->id}}">{{$level->name}}</option>
+										@endforeach
 								</select>
 							</div>
 							<div class="col-sm-6">

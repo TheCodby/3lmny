@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Material;
 use App\Models\MaterialsTypes;
+use App\Models\Level;
 
 class AdminController extends Controller
 {
@@ -18,7 +19,7 @@ class AdminController extends Controller
     public function __invoke(Request $request)
     {
         //
-		return view('admin.home', ['materials' => Material::all(), 'types' => MaterialsTypes::all()]);
+		return view('admin.home', ['materials' => Material::all(), 'types' => MaterialsTypes::all(), 'levels' => Level::all()]);
     }
 	public function AddMaterial(Request $request)
 	{
@@ -95,6 +96,43 @@ class AdminController extends Controller
 			return redirect()
 				->route('admin')
 				->with('message', 'Successfully deleted a type '.$type->name);
+		}else{
+			return redirect()
+				->route('admin');
+		}
+	}
+	public function AddLevel(Request $request)
+	{
+		$validator = Validator::make($request->all(), [
+			'name' => 'required|string|max:20',
+		]);
+		if($validator->fails())
+		{
+			return redirect()
+				->route('admin')
+				->withErrors($validator)
+				->withInput();
+		}
+		$type = Level::create(request(['name']));
+		if($type)
+		{
+			return redirect()
+				->route('admin')
+				->with('message', 'Successfully created a level '.$request->name);
+		}else{
+			return redirect()
+				->route('admin');
+		}
+	}
+	public function DeleteLevel(Request $request)
+	{
+		$type = Level::findOrFail($request->id);
+		if($type)
+		{
+			$type->delete();
+			return redirect()
+				->route('admin')
+				->with('message', 'Successfully deleted a level '.$type->name);
 		}else{
 			return redirect()
 				->route('admin');

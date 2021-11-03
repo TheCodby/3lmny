@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Material;
 use App\Models\MaterialsTypes;
+use App\Models\Level;
 use Carbon\Carbon;
 
 class MaterialsController extends Controller
@@ -18,12 +19,12 @@ class MaterialsController extends Controller
     public function __invoke(Request $request)
     {
         //
-        $materials = Material::with('materialTypes')->get();
+        $materials = Material::with('type')->get();
         foreach($materials as $material)
         {
             $material['updated'] = Carbon::parse($material->updated_at)->diffForHumans();
         }
-		return view('browse.home', ['materials' => $materials, 'types' => MaterialsTypes::all()]);
+		return view('browse.home', ['materials' => $materials, 'types' => MaterialsTypes::all(), 'levels' => Level::all()]);
     }
     public function showMaterial()
     {

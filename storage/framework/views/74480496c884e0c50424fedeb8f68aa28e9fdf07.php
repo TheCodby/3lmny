@@ -15,10 +15,10 @@
 							<div class="col-4">
 								<label for="basic-url" class="form-label">Type</label>
 								<select class="form-select" aria-label="All">
-								  <option selected>All</option>
-								  <option value="1">Math</option>
-								  <option value="2">Physics</option>
-								  <option value="3">English</option>
+								  <option selected>Choose type</option>
+								  <?php $__currentLoopData = $types; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $type): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+									<option value="<?php echo e($type->id); ?>"><?php echo e($type->name); ?></option>
+								<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 								</select>
 							</div>
 						</div>
@@ -26,11 +26,10 @@
 							<div class="col-6">
 								<label for="basic-url" class="form-label">Level</label>
 								<select class="form-select" aria-label="All">
-								  <option selected>Empty</option>
-								  <option value="1">Primary education</option>
-								  <option value="2">Middle education</option>
-								  <option value="3">High school</option>
-								  <option value="4">College education</option>
+								  	<option selected>All</option>
+									<?php $__currentLoopData = $levels; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $level): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+										<option value="<?php echo e($level->id); ?>"><?php echo e($level->name); ?></option>
+									<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 								</select>
 							</div>
 							<div class="col-6">
@@ -64,11 +63,12 @@
 <div class='d-flex justify-content-center mt-2 mb-2'>
 		<button type='button' class='btn btn-outline-Primary btn-md' data-bs-toggle="modal" data-bs-target="#addMaterial"><i class="fas fa-plus"></i> Add Material</button>
 		<button type='button' class='btn btn-outline-Primary btn-md ms-1' data-bs-toggle="modal" data-bs-target="#showTypes"><i class="fas fa-clipboard-list"></i> Show types</button>
-		<button type='button' class='btn btn-outline-Primary btn-md ms-1' data-bs-toggle="modal" data-bs-target="#showlevels"><i class="fas fa-user-graduate"></i> Show levels</button>
+		<button type='button' class='btn btn-outline-Primary btn-md ms-1' data-bs-toggle="modal" data-bs-target="#showLevels"><i class="fas fa-user-graduate"></i> Show levels</button>
 		<a class='btn btn-outline-Primary btn-md ms-1'><i class="fas fa-paper-plane"></i> Show requests</a>
 </div>
 <?php echo $__env->make('admin.materials.add', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php echo $__env->make('admin.materials.types', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php echo $__env->make('admin.materials.levels', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <div class="table-scrollable">
 	<table class="table table-striped table-hover">
 		<thead>

@@ -30,10 +30,9 @@
 								<label for="basic-url" class="form-label">Level</label>
 								<select class="form-select" aria-label="All">
 									<option selected>All</option>
-									<option value="1">Primary education</option>
-									<option value="2">Middle education</option>
-									<option value="3">High school</option>
-									<option value="4">College education</option>
+										<?php $__currentLoopData = $levels; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $level): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+											<option value="<?php echo e($level->id); ?>"><?php echo e($level->name); ?></option>
+										<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 								</select>
 							</div>
 							<div class="col-sm-6">

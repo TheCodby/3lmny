@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\MaterialsTypes;
+use App\Models\Level;
 
 class Material extends Model
 {
@@ -17,7 +18,10 @@ class Material extends Model
 		'level',
 		'keywords',
 	];
-	public function materialTypes(){
+	public function type(){
         return $this->belongsTo(MaterialsTypes::class, 'type', 'id');
+    }
+	public function level(){
+        return $this->belongsTo(Level::class, 'level', 'id');
     }
 }

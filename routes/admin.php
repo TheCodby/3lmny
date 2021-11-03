@@ -22,3 +22,5 @@ Route::get('/Materials/Edit/{id}', [AdminController::class, 'EditMaterial'])->na
 Route::get('/Materials/Delete/{id}', [AdminController::class, 'DeleteMaterial'])->name('admin.materials.delete');
 Route::post('/Types/Add', [AdminController::class, 'AddType'])->name('admin.types.add');
 Route::get('/Types/Delete/{id}', [AdminController::class, 'DeleteType'])->name('admin.types.delete');
+Route::post('/Levels/Add', [AdminController::class, 'AddLevel'])->name('admin.levels.add');
+Route::get('/Levels/Delete/{id}', [AdminController::class, 'DeleteLevel'])->name('admin.levels.delete');
