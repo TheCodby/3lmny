@@ -4,7 +4,7 @@
 			<div class='card-header'>
 				<h3>Filters</h3>
 			</div>
-				<div class='card-body align-self-center'>
+				<div class='card-body'>
 					<form method='POST' action='{{route("admin.materials.search")}}'>
 						@csrf
 						<div class='form-group row'>

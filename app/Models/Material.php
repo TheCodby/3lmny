@@ -19,9 +19,9 @@ class Material extends Model
 		'keywords',
 	];
 	public function materialTypes(){
-        return $this->belongsTo(MaterialsTypes::class, 'type', 'id');
+        return $this->belongsTo(MaterialsTypes::class, 'type');
     }
 	public function levelName(){
-        return $this->belongsTo(Level::class, 'level', 'id');
+        return $this->belongsTo(Level::class, 'level');
     }
 }

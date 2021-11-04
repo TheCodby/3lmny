@@ -64,7 +64,7 @@
 									<p class='mb-0'>Level: {{$material->levelName->name}}</p>
 									<p class="card-text mb-0 fs-6">{{mb_substr($material->description, 0, 50, 'utf-8')}}</p>
 									<p class="card-text mb-0"><small class="text-muted">Last Updated {{$material->updated}}</small></p>
-									<a href="#" class="stretched-link mb-0"></a>
+									<a href="{{route('materials.show', $material->id)}}" class="stretched-link mb-0"></a>
 									</div>
 								</div>
 							</div>

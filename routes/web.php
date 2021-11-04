@@ -41,5 +41,11 @@ Route::middleware(['auth'])->group(function () {
 		Route::get('/Logout', LogoutController::class)->name('logout');
 	});
 });
-Route::get('/Materials', MaterialsController::class)->name('materials');
-Route::get('/Materials/{id}', [MaterialsController::class, 'showMaterial'])->name('materials.show');
+Route::prefix('Materials')->group(function () {
+	Route::get('/', MaterialsController::class)->name('materials');
+	Route::get('/{id}', [MaterialsController::class, 'showMaterial'])->name('materials.show');
+	Route::middleware(['auth'])->group(function () {
+		Route::post('/{id}/AddComment', [MaterialsController::class, 'addComment'])->name('materials.commend.add');
+		Route::get('/{id}/DeleteComment/{commentID}', [MaterialsController::class, 'deleteComment'])->name('materials.commend.delete');
+	});
+});

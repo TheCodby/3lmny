@@ -4,7 +4,7 @@
 			<div class='card-header'>
 				<h3>Filters</h3>
 			</div>
-				<div class='card-body align-self-center'>
+				<div class='card-body'>
 					<form method='POST' action='<?php echo e(route("admin.materials.search")); ?>'>
 						<?php echo csrf_field(); ?>
 						<div class='form-group row'>
