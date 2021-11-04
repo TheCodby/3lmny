@@ -19,7 +19,7 @@ class MaterialsController extends Controller
     public function __invoke(Request $request)
     {
         //
-        $materials = Material::with('type')->get();
+        $materials = Material::with('materialTypes')->with('levelName')->get();
         foreach($materials as $material)
         {
             $material['updated'] = Carbon::parse($material->updated_at)->diffForHumans();

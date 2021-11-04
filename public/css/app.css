@@ -11365,6 +11365,16 @@ textarea.form-control-lg {
   max-width: 100vw;
 }
 
+.card {
+  border-radius: 30px;
+}
+.card .card-header {
+  border-radius: 30px 30px 0px 0px;
+}
+.card .card-footer {
+  border-radius: 0px 0px 30px 30px;
+}
+
 .card-hover {
   transition: 0.3s;
 }
@@ -11378,14 +11388,24 @@ textarea.form-control-lg {
   box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
 }
 
-.custom-card {
-  background-image: linear-gradient(-80deg, #ececec, transparent 50%);
+.card-img {
+  border-radius: 30px 30px 0px 0px;
 }
 
-.card-img {
-  max-height: 180px;
-  width: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-  position: relative;
+@media (min-width: 768px) {
+  .custom-card {
+    flex-direction: row;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .card-img {
+    width: 56.25%;
+    border-radius: 30px 0px 0px 30px;
+  }
+}
+@media (min-width: 992px) {
+  .card-img {
+    width: 33.3%;
+  }
 }

@@ -18,10 +18,10 @@ class Material extends Model
 		'level',
 		'keywords',
 	];
-	public function type(){
+	public function materialTypes(){
         return $this->belongsTo(MaterialsTypes::class, 'type', 'id');
     }
-	public function level(){
+	public function levelName(){
         return $this->belongsTo(Level::class, 'level', 'id');
     }
 }

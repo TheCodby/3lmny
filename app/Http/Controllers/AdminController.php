@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Material;
 use App\Models\MaterialsTypes;
 use App\Models\Level;
+use App\Discord\DiscordWebhook;
 
 class AdminController extends Controller
 {
@@ -24,8 +25,8 @@ class AdminController extends Controller
 	public function AddMaterial(Request $request)
 	{
 		$validator = Validator::make($request->all(), [
-			'subject' => 'required|string|max:30',
-			'description' => 'required|string|max:250',
+			'subject' => 'required|string',
+			'description' => 'required|string',
 			'url' => 'required|string',
 			'type' => 'required|integer',
 			'level' => 'required|integer',
@@ -43,8 +44,11 @@ class AdminController extends Controller
 		$data = request(['subject', 'description', 'url', 'type', 'level']);
 		$data['keywords'] = $keywords;
 		$material = Material::create($data);
+		$materials = Material::with('materialTypes')->with('levelName')->get()->where('id', '=', $material->id);
 		if($material)
 		{
+			$discordMsg = new DiscordWebhook();
+			$discordMsg->SendNotification("We Added ".$material->subject, $material->description, url("/Materials/{$material->id}"), $material->materialTypes->name, $material->levelName->name);
 			return redirect()
 				->route('admin')
 				->with('message', 'Successfully created a material '. $request->subject);

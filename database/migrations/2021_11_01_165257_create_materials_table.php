@@ -16,7 +16,7 @@ class CreateMaterialsTable extends Migration
         Schema::create('materials', function (Blueprint $table) {
             $table->id();
             $table->string('subject');
-            $table->string('description');
+            $table->longText('description');
             $table->string('url');
             $table->string('type');
 			$table->string('level'); 
