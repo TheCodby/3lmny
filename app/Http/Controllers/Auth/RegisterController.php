@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Auth;
 
 class RegisterController extends Controller
 {
@@ -56,7 +57,9 @@ class RegisterController extends Controller
 		$user = User::create(request(['username', 'email', 'password']));
 		if($user)
 		{
-			return back()->with('message', 'Successfully created an account');
+			if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+                return redirect()->route('index');
+            }
 		}
     }
 }

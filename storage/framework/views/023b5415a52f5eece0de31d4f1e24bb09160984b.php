@@ -1,3 +1,5 @@
+
+
 <?php $__env->startSection('title', __('titles.login')); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -87,9 +89,9 @@ unset($__errorArgs, $__bag); ?>
 
                                 </button>
 
-                                <?php if(Route::has('password.request')): ?>
-                                    <a class="btn btn-link" href="<?php echo e(route('password.request')); ?>">
-                                        <?php echo e(__('Forgot Your Password?')); ?>
+                                <?php if(Route::has('register')): ?>
+                                    <a class="btn btn-link" href="<?php echo e(route('register')); ?>">
+                                        <?php echo e(__('auth.loginReg')); ?>
 
                                     </a>
                                 <?php endif; ?>

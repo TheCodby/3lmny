@@ -22,7 +22,7 @@
 	<script src="{{asset('js/jquery_tagsinput.js')}}"></script>
 	<nav class="navbar navbar-custom navbar-light navbar-expand-md shadow-sm p-3 mb-5" id='navbar'>
 		<div class="container-fluid">
-			<a class="navbar-brand" href="#">{{ __('titles.3lmny') }}</a>
+			<a class="navbar-brand" href="{{route('index')}}">{{ __('titles.3lmny') }}</a>
 			<ul class="navbar-nav me-auto">
 					<li class="nav-item">
 						<ul class="navbar-nav">
@@ -46,10 +46,10 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarContent">
 				<ul class="navbar-nav ms-auto">
-					@guest
-						<li class="nav-item ms-1 mt-1 mt-md-0"><a type="button" class="btn btn-primary navbar-btn menu-item" href="{{ route('login') }}"><i class="fas fa-user"></i> {{ ucfirst(__('buttons.login')) }}</a></li>
-					@endguest
 						<li class="nav-item ms-1 mt-1 mt-md-0"><a type="button" href="{{ route('materials') }}" class="btn btn-outline-primary navbar-btn menu-item"><i class="fas fa-book"></i> {{ ucfirst(__('buttons.materials')) }}</a></li>
+						@guest
+							<li class="nav-item ms-1 mt-1 mt-md-0"><a type="button" class="btn btn-primary navbar-btn menu-item" href="{{ route('login') }}"><i class="fas fa-user"></i> {{ ucfirst(__('buttons.login')) }}</a></li>
+						@endguest
 					@auth
 						<li class="nav-item ms-1 mt-1 mt-md-0"><a type="button" class="btn btn-gold navbar-btn menu-item"><i class="fas fa-hand-holding-usd"></i> {{ ucfirst(__('buttons.donate')) }}</a></li>
 						<li class='nav-item ms-1 mt-1 mt-md-0'><div class="dropdown">

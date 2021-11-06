@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\MaterialsController;
+use App\Http\Controllers\ProfileController;
 
 
 /*
@@ -37,6 +38,11 @@ Route::middleware(['guest'])->group(function () {
 	});
 });
 Route::middleware(['auth'])->group(function () {
+	Route::prefix('Profile')->group(function () {
+		Route::get('', ProfileController::class)->name('profile.complete');
+		Route::get('Complete', [ProfileController::class, 'showComProfile'])->name('profile.complete');
+		Route::post('Complete', [ProfileController::class, 'completeProfile'])->name('profile.complete');
+	});
 	Route::prefix('Auth')->group(function () {
 		Route::get('/Logout', LogoutController::class)->name('logout');
 	});

@@ -3,7 +3,7 @@
 @section('title', __('titles.materials'))
 
 @section('content')
-	<div class='container position:relative;'>
+	<div class='container'>
 		<div class="row">
 			<div class='col-sm-4'>
 				<div class="card shadow mb-3 sticky-top">

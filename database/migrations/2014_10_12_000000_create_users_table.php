@@ -19,7 +19,10 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
 			# user_type specify permessions for user (1-> Member, 2-> Admin)
-			$table->string('user_type')->default('1'); 
+			$table->integer('user_type')->default(1); 
+            $table->integer('age')->nullable();
+            $table->integer('level')->nullable();
+            $table->text('major')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

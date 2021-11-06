@@ -28,8 +28,8 @@ class AdminController extends Controller
 			'subject' => 'required|string',
 			'description' => 'required|string',
 			'url' => 'required|string',
-			'type' => 'required|integer',
-			'level' => 'required|integer',
+			'type' => 'required|numeric',
+			'level' => 'required|numeric',
 			'keywords' => 'nullable|string',
 		]);
 		if($validator->fails())

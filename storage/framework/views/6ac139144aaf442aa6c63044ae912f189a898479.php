@@ -1,3 +1,5 @@
+
+
 <?php $__env->startSection('title', __('titles.register') ); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -14,7 +16,6 @@
                         <?php echo csrf_field(); ?>
 						<?php if(session()->has('message')): ?>
 						<div class="alert alert-success d-flex align-items-center" role="alert">
-						  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
 						  <div>
 							<?php echo e(session()->get('message')); ?>
 

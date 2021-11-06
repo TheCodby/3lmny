@@ -22,7 +22,7 @@
 	<script src="<?php echo e(asset('js/jquery_tagsinput.js')); ?>"></script>
 	<nav class="navbar navbar-custom navbar-light navbar-expand-md shadow-sm p-3 mb-5" id='navbar'>
 		<div class="container-fluid">
-			<a class="navbar-brand" href="#"><?php echo e(__('titles.3lmny')); ?></a>
+			<a class="navbar-brand" href="<?php echo e(route('index')); ?>"><?php echo e(__('titles.3lmny')); ?></a>
 			<ul class="navbar-nav me-auto">
 					<li class="nav-item">
 						<ul class="navbar-nav">
@@ -46,10 +46,10 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarContent">
 				<ul class="navbar-nav ms-auto">
-					<?php if(auth()->guard()->guest()): ?>
-						<li class="nav-item ms-1 mt-1 mt-md-0"><a type="button" class="btn btn-primary navbar-btn menu-item" href="<?php echo e(route('login')); ?>"><i class="fas fa-user"></i> <?php echo e(ucfirst(__('buttons.login'))); ?></a></li>
-					<?php endif; ?>
 						<li class="nav-item ms-1 mt-1 mt-md-0"><a type="button" href="<?php echo e(route('materials')); ?>" class="btn btn-outline-primary navbar-btn menu-item"><i class="fas fa-book"></i> <?php echo e(ucfirst(__('buttons.materials'))); ?></a></li>
+						<?php if(auth()->guard()->guest()): ?>
+							<li class="nav-item ms-1 mt-1 mt-md-0"><a type="button" class="btn btn-primary navbar-btn menu-item" href="<?php echo e(route('login')); ?>"><i class="fas fa-user"></i> <?php echo e(ucfirst(__('buttons.login'))); ?></a></li>
+						<?php endif; ?>
 					<?php if(auth()->guard()->check()): ?>
 						<li class="nav-item ms-1 mt-1 mt-md-0"><a type="button" class="btn btn-gold navbar-btn menu-item"><i class="fas fa-hand-holding-usd"></i> <?php echo e(ucfirst(__('buttons.donate'))); ?></a></li>
 						<li class='nav-item ms-1 mt-1 mt-md-0'><div class="dropdown">

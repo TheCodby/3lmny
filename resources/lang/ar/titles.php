@@ -21,4 +21,5 @@ return [
 	'browse' => 'تصفح',
 	'admin' => 'الإدارة',
     'materials' => 'المواد',
+    'completeprofile' => 'إكمال حسابك'
 ];
