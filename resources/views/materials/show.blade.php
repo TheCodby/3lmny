@@ -22,7 +22,10 @@
 			  </div>
 			</div>
 			@endif
-            <div class="col-md-8">
+            <div class="col-md-4 mb-3 order-md-2">
+                <img src="{{asset('images/materials/1.jpeg')}}" class="img-fluid hoverimage" style='border-radius:30px;'>
+            </div>
+            <div class="col-md-8 mb-3 order-md-1">
                 <div class="card shadow">
                     <div class="card-body">
                         <h2 class="card-title">{{$material->subject}}</h2>
@@ -33,32 +36,50 @@
                             <p class="badge rounded-pill bg-primary mb-0 fs-6">{{$keyword}}</p>
                         @endforeach
                         <p class='mt-2'>{{$material->description}}</p>
-                        <a href="{{$material->url}}" class="btn btn-primary float-end"><i class="fas fa-box-open"></i> Open</a>
+                        <div class='d-flex justify-content-between'>
+                            <div style='align-self: center;'>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                            </div>
+                            <a href="{{$material->url}}" class="btn btn-primary float-end"><i class="fas fa-box-open"></i> Open</a>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-4">
-                <img src="{{asset('images/materials/1.jpeg')}}" class="img-fluid hoverimage" style='border-radius:30px;'>
-            </div>
         </div>
-        <div class="row mt-5 mb-3">
+        <div class="row mb-3">
             <div class="col-md-8">
-                <h3>Comments</h3>
+                @if(!$comments->isEmpty())
+                    <h3>Comments</h3>
+                @endif
                 @foreach($comments as $comment)
                     <div class="card shadow mb-3">
                         <div class="card-body">
-                            <h5 class="me-auto card-title"><img src="{{asset('images/users/default.png')}}" class='avatar avatar-32 bg-light rounded-circle text-white top-0'> {{$comment->user->username}}</h5>
-                            <p class="card-text">{{$comment->comment}}</p>
-                        </div>
-                        @if(!auth()->guest() && (Auth::user()->user_type == '2' || Auth::user()->id == $comment->u_id))
-                            <div class="card-footer d-flex justify-content-center">
-                                <a href='{{route("materials.commend.delete", ["id" => $comment->m_id, "commentID" => $comment->id])}}' title="Delete Comment"><i class="fas fa-trash-alt"></i></a>
-                                @if(Auth::user()->user_type == '2')
-                                    <a href='#' class='ms-2' title="Ban User"><i class="fas fa-user-slash"></i></a>
-                                    <a href='#' class='ms-2' title="Warn User"><i class="fas fa-exclamation-triangle"></i></a>
+                            <div class='row justify-content-between'>
+                                <div class="col-4">
+                                    <div class='d-flex'>
+                                        <img src="{{asset('images/users/default.png')}}" class='avatar avatar-32 bg-light rounded-circle text-white top-0'>
+                                        <h5 class="mx-2 card-title">{{$comment->user->username}}<p class="card-text text-muted fs-6">{{$comment->created}}</p></h5>
+                                    </div>
+                                </div>
+                                @if(Auth::user())
+                                    <div class="col-4 d-flex justify-content-end">
+                                        <a href='#' class='ms-2' title="Report User"><i class="fas fa-flag"></i></a>
+                                        @if(Auth::user()->user_type == '2' || Auth::user()->id == $comment->u_id)
+                                        <a class='ms-2' href='{{route("materials.commend.delete", ["id" => $comment->m_id, "commentID" => $comment->id])}}' title="Delete Comment"><i class="fas fa-trash-alt"></i></a>
+                                        @endif
+                                        @if(Auth::user()->user_type == '2')
+                                            <a href='#' class='ms-2' title="Ban User"><i class="fas fa-user-slash"></i></a>
+                                            <a href='#' class='ms-2' title="Warn User"><i class="fas fa-exclamation-triangle"></i></a>
+                                        @endif
+                                    </div>
                                 @endif
                             </div>
-                        @endif
+                            <p class="card-text">{{$comment->comment}}</p>
+                        </div>
                     </div>
                 @endforeach
                 @auth

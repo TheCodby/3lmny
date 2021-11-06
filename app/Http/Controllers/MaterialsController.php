@@ -32,6 +32,10 @@ class MaterialsController extends Controller
     public function showMaterial(String $id)
     {
         $comments = Comment::with('user')->get()->where('m_id', '=', $id);
+        foreach($comments as $commant)
+        {
+            $commant['created'] = Carbon::parse($commant->created_at)->diffForHumans();
+        }
         $material = Material::find($id);
         if($material)
         {
@@ -68,6 +72,11 @@ class MaterialsController extends Controller
     public function deleteComment(String $id, String $commentID)
     {
         $comment = Comment::findOrFail($commentID);
+        if(Auth::id() != $comment->u_id)
+        {
+            return redirect()
+                ->route('materials.show', $id);
+        }
 		if($comment)
 		{
 			$comment->delete();
