@@ -103,4 +103,6 @@
 			<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 		</tbody>
 	</table>
+	<?php echo e($materials->links()); ?>
+
 </div><?php /**PATH C:\3lmny\resources\views/admin/materials.blade.php ENDPATH**/ ?>

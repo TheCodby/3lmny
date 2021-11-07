@@ -24,7 +24,7 @@
             <div class="col-8">
                 <div class="card">
                     <div class="card-header fs-4">Complete Your Profile</div>
-                    <div class="card-body p-2">
+                    <div class="card-body">
                         <p class="card-text">Please fill these fields to give you better recommends</p>
                         <form method='POST' action='{{route("profile.complete")}}'>
                             @csrf

@@ -21,11 +21,15 @@ class MaterialsController extends Controller
      */
     public function __invoke(Request $request)
     {
-        //
-        $materials = Material::with('materialTypes')->with('levelName')->get();
+        $materials = Material::with('materialTypes')->with('levelName')->orderBy('id', 'DESC')->paginate(15);
         foreach($materials as $material)
         {
             $material['updated'] = Carbon::parse($material->updated_at)->diffForHumans();
+        }
+        //limit pages
+        if ( $request->page > ($materials->lastPage()) )
+        {
+            abort(404);
         }
 		return view('materials.home', ['materials' => $materials, 'types' => MaterialsTypes::all(), 'levels' => Level::all()]);
     }

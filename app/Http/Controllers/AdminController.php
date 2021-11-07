@@ -8,6 +8,7 @@ use App\Models\Material;
 use App\Models\MaterialsTypes;
 use App\Models\Level;
 use App\Discord\DiscordWebhook;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -20,7 +21,17 @@ class AdminController extends Controller
     public function __invoke(Request $request)
     {
         //
-		return view('admin.home', ['materials' => Material::all(), 'types' => MaterialsTypes::all(), 'levels' => Level::all()]);
+		$materials = Material::paginate(15, ['*'], 'MaterialsPage');
+        foreach($materials as $material)
+        {
+            $material['updated'] = Carbon::parse($material->updated_at)->diffForHumans();
+        }
+        //limit pages
+        if ( $request->page > ($materials->lastPage()) )
+        {
+            abort(404);
+        }
+		return view('admin.home', ['materials' => $materials, 'types' => MaterialsTypes::all(), 'levels' => Level::all()]);
     }
 	public function AddMaterial(Request $request)
 	{

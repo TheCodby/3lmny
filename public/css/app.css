@@ -11396,3 +11396,7 @@ textarea.form-control-lg {
 .checked {
   color: orange;
 }
+
+.pagination {
+  justify-content: center;
+}
