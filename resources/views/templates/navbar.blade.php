@@ -24,7 +24,7 @@
 					</li>
 				</ul>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
+				<span class="fas fa-bars"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarContent">
 				<ul class="navbar-nav ms-auto">
@@ -43,7 +43,7 @@
 						@else
 							<ul class="dropdown-menu dropdown-menu-end" style="position:absolute;" aria-labelledby="dropdownMenuLink">
 						@endif
-							<li><a class="dropdown-item" href="#">Account</a></li>
+							<li><a class="dropdown-item" href="#">Profile</a></li>
 							<li><a class="dropdown-item" href="#">Settings</a></li>
 							<li><a class="dropdown-item" href="#">Bookmarks</a></li>
 							@if(Auth::user()->user_type == '2')

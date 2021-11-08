@@ -104,15 +104,8 @@
   transform: rotate(180deg);
 }
 
-.cwave svg {
-  position: relative;
-  display: block;
-  width: calc(100% + 1.3px);
-  height: 164px;
-}
-
 .wave .shape-fill {
-  fill: #f8fafc;
+  fill: #2F334C;
 }
 .caption{
   top: 40%;
@@ -120,22 +113,28 @@
   position: relative;
 
 }
-a {
+.button3 {
   text-decoration: none;
   color:#f8fafc;
 }
-a:link {
+.button3:link {
   text-decoration: none;
 }
 
-a:visited {
+.button3:visited {
   text-decoration: none;
 }
 
-a:hover {
-  text-decoration: underline;
+.button3:hover {
+  text-decoration: none;
+  color:black;
 }
 
-a:active {
-  text-decoration: underline;
+.button3:active {
+  text-decoration: none;
+}
+.book{
+  width:30vw;
+  height:40vh;
+  background: url('/images/css/svg/book.svg');
 }

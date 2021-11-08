@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css2?family=Cairo);
+@import url(https://fonts.googleapis.com/css2?family=Cairo:wght@300&family=Changa&display=swap);
 @charset "UTF-8";
 /*!
  * Bootstrap v5.1.3 (https://getbootstrap.com/)
@@ -49,7 +49,7 @@
   --bs-black-rgb: 0, 0, 0;
   --bs-body-color-rgb: 33, 37, 41;
   --bs-body-bg-rgb: 248, 250, 252;
-  --bs-font-sans-serif: "Cairo", sans-serif;
+  --bs-font-sans-serif: "Changa", sans-serif;
   --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
   --bs-body-font-family: var(--bs-font-sans-serif);
@@ -11411,15 +11411,8 @@ textarea.form-control-lg {
   transform: rotate(180deg);
 }
 
-.cwave svg {
-  position: relative;
-  display: block;
-  width: calc(100% + 1.3px);
-  height: 164px;
-}
-
 .wave .shape-fill {
-  fill: #f8fafc;
+  fill: #2F334C;
 }
 
 .caption {
@@ -11428,23 +11421,30 @@ textarea.form-control-lg {
   position: relative;
 }
 
-a {
+.button3 {
   text-decoration: none;
   color: #f8fafc;
 }
 
-a:link {
+.button3:link {
   text-decoration: none;
 }
 
-a:visited {
+.button3:visited {
   text-decoration: none;
 }
 
-a:hover {
-  text-decoration: underline;
+.button3:hover {
+  text-decoration: none;
+  color: black;
 }
 
-a:active {
-  text-decoration: underline;
+.button3:active {
+  text-decoration: none;
+}
+
+.book {
+  width: 30vw;
+  height: 40vh;
+  background: url("/images/css/svg/book.svg");
 }

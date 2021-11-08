@@ -17,4 +17,5 @@ return [
 	'password' => 'password',
 	'confirmpassword' => 'Confirm Password',
 	'greeting' => 'We guide you to the easiest way',
+    'indextext' => 'Find the best materials that help you study more effectively.',
 ];
