@@ -11400,3 +11400,51 @@ textarea.form-control-lg {
 .pagination {
   justify-content: center;
 }
+
+.wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+}
+
+.cwave svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 164px;
+}
+
+.wave .shape-fill {
+  fill: #f8fafc;
+}
+
+.caption {
+  top: 40%;
+  transform: translateY(-50%);
+  position: relative;
+}
+
+a {
+  text-decoration: none;
+  color: #f8fafc;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  text-decoration: underline;
+}
