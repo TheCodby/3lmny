@@ -85,7 +85,7 @@
 		<div class="row justify-content-center" style='margin-bottom: 100px'>
 			<div class="col-md-4">
 				<div class="card text-white text-center p-2 border-dark mb-3 mt-5 border-0" style='background-color:#2F334C'>
-					<i class="fas fa-book" style='color:#fff; font-size:72px;'></i>
+					<i class='align-self-center' data-feather="book-open" stroke-width='2' width='72px' height='72px'></i>
 					<div class="card-body">
 						<h5 class="card-title">20 Materials</h5>
 					</div>
@@ -93,7 +93,7 @@
 			</div>
 			<div class="col-md-4">
 				<div class="card text-white text-center p-2 border-dark mb-3 mt-5 border-0" style='background-color:#2F334C'>
-					<i class="fas fa-id-card" style='color:#fff; font-size:72px;'></i>
+					<i class='align-self-center' data-feather="users" stroke-width='2' width='72px' height='72px'></i>
 					<div class="card-body">
 						<h5 class="card-title">2 Users</h5>
 					</div>
@@ -101,7 +101,7 @@
 			</div>
 			<div class="col-md-4">
 				<div class="card text-white text-center p-2 border-dark mb-3 mt-5 border-0" style='background-color:#2F334C'>
-					<i class="fas fa-users" style='color:#fff; font-size:72px;'></i>
+				<i class='align-self-center' data-feather="eye" stroke-width='2' width='72px' height='72px'></i>
 					<div class="card-body">
 						<h5 class="card-title">10 Visitors</h5>
 					</div>
@@ -114,9 +114,35 @@
 			</svg>
 		</div>
 	</div>
-	<div style='width: 100%;overflow: hidden;position:relative;'>
-		<div class="h-100" style='background-color:#1f2233;'>
-
+	<div style='width: 100%;overflow: hidden;position:relative;background-color:#1f2233;'>
+		<div style='margin-bottom: 100px'>
+			<div class="row justify-content-center mt-5 p-4">
+				<h3 class='text-light text-center'>Contact Us</h3>
+				<div class='col-md-6 d-flex justify-content-center'>
+					<img id='books' src="{{asset('images/css/png/contactus.png')}}" style='width:100vw;'> </object>
+				</div>
+				<div class='col-md-4'>
+					<div class="form-floating mb-3 text-light">
+						<input type="text" class="form-control custominput bg-dark text-light" id="floatingInput">
+						<label for="floatingInput">Your Name</label>
+					</div>
+					<div class="form-floating mb-3 text-light">
+						<input type="email" class="form-control custominput bg-dark text-light" id="floatingInput">
+						<label for="floatingInput">Email</label>
+					</div>
+					<div class="form-floating mb-3 text-light">
+						<input type="text" class="form-control custominput bg-dark text-light" id="floatingInput">
+						<label for="floatingInput">Subject</label>
+					</div>
+					<div class="form-floating text-light">
+						<textarea class="form-control custominput bg-dark text-light h-50" id="floatingTextarea2" style="height: 100px"></textarea>
+						<label for="floatingTextarea2">Message</label>
+					</div>
+					<div class="d-flex justify-content-center">
+						<button type="button" class="btn btn-success mt-2 align-self-center">Submit</button>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	<script type="text/javascript">

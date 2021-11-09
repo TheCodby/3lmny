@@ -13,7 +13,8 @@
 			<meta charset="utf-8">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
 			<link href="<?php echo e(asset('css/app.css')); ?>" rel="stylesheet" type="text/css" >
-			<script src="https://kit.fontawesome.com/ba6d6c4c2b.js" crossorigin="anonymous"></script>
+			<script src="https://unpkg.com/feather-icons"></script>
+			<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 			<link href="<?php echo e(asset('css/jquery_tagsinput.css')); ?>" rel="stylesheet" type="text/css" >
 			<meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 		</head>

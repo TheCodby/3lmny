@@ -11448,3 +11448,15 @@ textarea.form-control-lg {
   height: 40vh;
   background: url("/images/css/svg/book.svg");
 }
+
+.custominput {
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-radius: 5px;
+  border-bottom: 2px solid #ced4da;
+}
+
+textarea {
+  resize: none;
+}
