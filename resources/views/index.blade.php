@@ -43,7 +43,7 @@
 								<li class="nav-item ms-2 mt-2 mt-md-0 fs-6"><a type="button" href="#" class="navbar-btn menu-item button3 btn btn-link"> {{ ucfirst(__('buttons.donate')) }}</a></li>
 								<li class='nav-item ms-2 mt-2 mt-md-0 fs-6'><div class="dropdown">
 								<a class="button3 btn btn-link" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-									<i class="fas fa-user-circle"></i> {{ Auth::user()->username }}
+								<i data-feather="user"></i> {{ Auth::user()->username }}
 								</a>
 								<ul class="dropdown-menu dropdown-menu-end" style="position:absolute;" aria-labelledby="dropdownMenuLink">
 									<li><a class="dropdown-item" href="#">Profile</a></li>
@@ -123,19 +123,19 @@
 				</div>
 				<div class='col-md-4'>
 					<div class="form-floating mb-3 text-light">
-						<input type="text" class="form-control custominput bg-dark text-light" id="floatingInput">
+						<input type="text" name='name' style='background-color:#151722;' class="form-control custominput text-light" id="floatingInput">
 						<label for="floatingInput">Your Name</label>
 					</div>
 					<div class="form-floating mb-3 text-light">
-						<input type="email" class="form-control custominput bg-dark text-light" id="floatingInput">
+						<input type="email" name='email' style='background-color:#151722;' class="form-control custominput text-light" id="floatingInput">
 						<label for="floatingInput">Email</label>
 					</div>
 					<div class="form-floating mb-3 text-light">
-						<input type="text" class="form-control custominput bg-dark text-light" id="floatingInput">
+						<input type="text" name='subject' style='background-color:#151722;' class="form-control custominput text-light" id="floatingInput">
 						<label for="floatingInput">Subject</label>
 					</div>
 					<div class="form-floating text-light">
-						<textarea class="form-control custominput bg-dark text-light h-50" id="floatingTextarea2" style="height: 100px"></textarea>
+						<textarea style='background-color:#151722;' name='message' class="form-control custominput text-light h-50" id="floatingTextarea2" style="height: 100px"></textarea>
 						<label for="floatingTextarea2">Message</label>
 					</div>
 					<div class="d-flex justify-content-center">
