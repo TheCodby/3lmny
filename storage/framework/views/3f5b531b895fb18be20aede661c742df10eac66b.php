@@ -120,7 +120,7 @@
 			<div class="row justify-content-center mt-5 p-4">
 				<h3 class='text-light text-center'>Contact Us</h3>
 				<div class='col-md-6 d-flex justify-content-center'>
-					<img id='books' src="<?php echo e(asset('images/css/png/contactus.png')); ?>" style='width:100vw;'> </object>
+					<img id='books' src="<?php echo e(asset('images/css/png/contactus.png')); ?>" style='max-width:100vw;'> </object>
 				</div>
 				<div class='col-md-4'>
 					<div class="form-floating mb-3 text-light">
