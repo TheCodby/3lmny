@@ -20,10 +20,9 @@ class ProfileController extends Controller
     {
         //
     }
-    public function showComProfile()
-    {
-        
-        return view('profile.complete', ['levels' => Level::all(), 'user' => User::select('age', 'level', 'major')->find(Auth::id())]);
+    public function showCompleteProfile()
+    {        
+        return view('profile.complete', ['levels' => Level::all(), 'user' => User::select('age', 'level', 'major', 'interests')->with('levelName')->find(Auth::id())]);
     }
     public function completeProfile(Request $request)
     {
@@ -31,6 +30,7 @@ class ProfileController extends Controller
             'age' => 'nullable|integer|between:6,60',
             'level' => 'nullable|integer|exists:App\Models\Level,id',
             'major' => 'nullable|string',
+            'interests' => 'nullable|string',
         ]);
         if($validator->fails())
 		{
@@ -39,7 +39,9 @@ class ProfileController extends Controller
 				->withErrors($validator)
 				->withInput();
 		}
-        $update = User::where('id', '=', Auth::id())->update(['age' => $request->age, 'level' => $request->level, 'major' => $request->major]);
+        $interests = explode(',', $request->interests);
+		$interests = json_encode($interests);
+        $update = User::where('id', '=', Auth::id())->update(['age' => $request->age, 'level' => $request->level, 'major' => $request->major, 'interests' => $request->interests]);
         if($update)
         {
             return redirect()

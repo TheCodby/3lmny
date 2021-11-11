@@ -7,18 +7,18 @@
 		<div class="row">
 			<div class='col-sm-4'>
 				<div class="card shadow mb-3 sticky-top">
-					<div class='card-header'><h3 class="card-title"><i class="fas fa-search"></i> Search</h3></div>
+					<div class='card-header'><h3 class="card-title"><i data-feather="search" stroke-width='2'></i> Filters</h3></div>
 					<div class="card-body ">
-					<form method='POST' action="{{ route('materials') }}" >
+					<form method='GET' action="{{ route('materials.filter') }}" >
 						<div class='form-group row'>
 							<div class="col-lg-8">
 								<label for="basic-url" class="form-label">Subject</label>
-								<input type="text" class="form-control">
+								<input type="text" name='subject' class="form-control">
 							</div>
 							<div class="col-lg-4">
 								<label for="basic-url" class="form-label">Type</label>
-								<select class="form-select" aria-label="All">
-									<option selected>All</option>
+								<select class="form-select" name='type' aria-label="All">
+									<option value='all' selected>All</option>
 									@foreach($types as $type)
 										<option value="{{$type->id}}">{{$type->name}}</option>
 									@endforeach
@@ -28,8 +28,8 @@
 						<div class='form-group row'>
 							<div class="col-lg-6">
 								<label for="basic-url" class="form-label">Level</label>
-								<select class="form-select" aria-label="All">
-									<option selected>All</option>
+								<select class="form-select" name='level' aria-label="All">
+									<option value='all' selected>All</option>
 										@foreach($levels as $level)
 											<option value="{{$level->id}}">{{$level->name}}</option>
 										@endforeach
@@ -37,7 +37,7 @@
 							</div>
 							<div class="col-lg-6">
 								<label for="basic-url" class="form-label">Keywords</label>
-								<input type="text" id="keywords" class="form-control">
+								<input type="text" name='keywords' id="keywords" class="form-control">
 							</div>
 						</div>
 						<button type='submit' class="btn btn-primary mt-2"><i class="fas fa-search"></i> Search</button>
@@ -60,8 +60,8 @@
 									@foreach ($keywords as $keyword)
 										<p class="badge rounded-pill bg-primary mb-0">{{$keyword}}</p>
 									@endforeach
-									<p class='mb-0'>Type: {{$material->materialTypes->name}}</p>
-									<p class='mb-0'>Level: {{$material->levelName->name}}</p>
+									<p class='mb-0'>Type: {{$material->materialTypes->name ?? 'None'}}</p>
+									<p class='mb-0'>Level: {{$material->levelName->name ?? 'None'}}</p>
 									<p class="card-text mb-0 fs-6">{{mb_substr($material->description, 0, 50, 'utf-8')}}</p>
 									<p class="card-text mb-0"><small class="text-muted">Last Updated {{$material->updated}}</small></p>
 									<a href="{{route('materials.show', $material->id)}}" class="stretched-link mb-0"></a>

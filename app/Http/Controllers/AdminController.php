@@ -107,7 +107,13 @@ class AdminController extends Controller
 		$type = MaterialsTypes::findOrFail($request->id);
 		if($type)
 		{
-			$type->delete();
+			if($type->delete())
+			{
+				$materials = Material::all();
+
+				Material::where('type','=',$request->id)
+				->update(['type' => null]);
+			}
 			return redirect()
 				->route('admin')
 				->with('message', 'Successfully deleted a type '.$type->name);
@@ -141,13 +147,19 @@ class AdminController extends Controller
 	}
 	public function DeleteLevel(Request $request)
 	{
-		$type = Level::findOrFail($request->id);
-		if($type)
+		$level = Level::findOrFail($request->id);
+		if($level)
 		{
-			$type->delete();
+			if($level->delete())
+			{
+				$materials = Material::all();
+
+				Material::where('level','=',$request->id)
+				->update(['level' => null]);
+			}
 			return redirect()
 				->route('admin')
-				->with('message', 'Successfully deleted a level '.$type->name);
+				->with('message', 'Successfully deleted a level '.$level->name);
 		}else{
 			return redirect()
 				->route('admin');

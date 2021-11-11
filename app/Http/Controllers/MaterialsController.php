@@ -92,4 +92,25 @@ class MaterialsController extends Controller
                 ->route('materials.show', $id);
 		}
     }
+    public function filterMaterials(Request $request)
+    {
+        $subject = $request->input('subject');
+        $type = $request->input('type');
+        $level = $request->input('level');
+        $keywords = $request->input('keywords');
+        $materials = Material::where('subject', 'LIKE', '%'.$subject.'%')
+            ->where('keywords', 'LIKE', '%'.$keywords.'%');
+        if($level != 'all'){
+            $materials->where('level', '=', $level);
+        };
+        if($type != 'all'){
+            $materials->where('type', '=', $type);
+        };
+        $materials = $materials->orderBy('id', 'DESC')->paginate(15);
+        foreach($materials as $material)
+        {
+            $material['updated'] = Carbon::parse($material->updated_at)->diffForHumans();
+        }
+        return view('materials.home', ['materials' => $materials, 'types' => MaterialsTypes::all(), 'levels' => Level::all()]);
+    }
 }

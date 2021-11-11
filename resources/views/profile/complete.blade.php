@@ -21,7 +21,7 @@
         </div>
         @endif
         <div class="row ">
-            <div class="col-8">
+            <div class="col-md-8">
                 <div class="card">
                     <div class="card-header fs-4">Complete Your Profile</div>
                     <div class="card-body">
@@ -30,32 +30,41 @@
                             @csrf
                             <div class="row">
                                 <div class="col-md-4">
-                                    <div class="form-floating">
-                                        <select class="form-select" id="floatingSelect" name='age' aria-label="">
+                                    <div class="form-group">
+                                        <label for="age" class="form-label">Your Age</label>
+                                        <select class="form-select" id="age" name='age' aria-label="">
                                             <option selected>{{$user->age ?? 'Choose your age'}}</option>
                                             @for ($i = 6; $i <= 60; $i++)
                                             <option value="{{$i}}">{{$i}}</option>
                                             @endfor
                                         </select>
-                                        <label for="floatingSelect">Your Age</label>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="form-floating">
-                                        <select class="form-select" id="floatingSelect" name='level' aria-label="">
-                                            <option selected>{{$user->level ?? 'Choose your level'}}</option>
+                                    <div class="form-group">
+                                    <label for="level" class="form-label">Your Level</label>
+                                        <select class="form-select" id="level" name='level' aria-label="">
+                                            <option value="{{$user->levelName->id}}" selected>{{$user->levelName->name}}</option>
                                             @foreach ($levels as $level)
-                                            <option value="{{$level->id}}">{{$level->name}}</option>
+                                                @if($level->id != $user->levelName->id)
+                                                    <option value="{{$level->id}}">{{$level->name}}</option>
+                                                @endif
                                             @endforeach
                                         </select>
-                                        <label for="floatingSelect">Your Level</label>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="form-floating">
-                                        <input type="text" name='major' value='{{$user->major}}' class="form-control" id="floatingInputGrid" placeholder="Computer Science, Math, English">
-                                        <label for="floatingInputGrid">Your Major</label>
+                                    <div class="form-group">
+                                    <label for="major" class="form-label">Your Major</label>
+                                        <input type="text" name='major' value='{{$user->major}}' class="form-control" id="major" placeholder="Computer Science, Math, English">
                                     </div>
+                                </div>
+                                
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="interests" class="form-label">Your Interests</label>
+                                    <input type="text" name='interests' id="interests" value='{{$user->interests}}' class="form-control">
                                 </div>
                             </div>
                             <button type='submit' class='btn btn-primary mt-2'>Update</button>
@@ -65,4 +74,9 @@
             </div>
         </div>
     </div>
+    <script>
+		$(document).ready( function() {
+			$('#interests').tagsInput();
+		});
+	</script>
 @endsection

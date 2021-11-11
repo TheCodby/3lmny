@@ -42,8 +42,8 @@
 							@auth
 								<li class="nav-item ms-2 mt-2 mt-md-0 fs-6"><a type="button" href="#" class="navbar-btn menu-item button3 btn btn-link"> {{ ucfirst(__('buttons.donate')) }}</a></li>
 								<li class='nav-item ms-2 mt-2 mt-md-0 fs-6'><div class="dropdown">
-								<a class="button3 btn btn-link" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-								<i data-feather="user"></i> {{ Auth::user()->username }}
+								<a class="button3 btn btn-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+									<i data-feather="user"></i> {{ Auth::user()->username }}
 								</a>
 								<ul class="dropdown-menu dropdown-menu-end" style="position:absolute;" aria-labelledby="dropdownMenuLink">
 									<li><a class="dropdown-item" href="#">Profile</a></li>

@@ -40,7 +40,7 @@ Route::middleware(['guest'])->group(function () {
 Route::middleware(['auth'])->group(function () {
 	Route::prefix('Profile')->group(function () {
 		Route::get('', ProfileController::class)->name('profile.complete');
-		Route::get('Complete', [ProfileController::class, 'showComProfile'])->name('profile.complete');
+		Route::get('Complete', [ProfileController::class, 'showCompleteProfile'])->name('profile.complete');
 		Route::post('Complete', [ProfileController::class, 'completeProfile'])->name('profile.complete');
 	});
 	Route::prefix('Auth')->group(function () {
@@ -49,6 +49,7 @@ Route::middleware(['auth'])->group(function () {
 });
 Route::prefix('Materials')->group(function () {
 	Route::get('/', MaterialsController::class)->name('materials');
+	Route::get('/Filter', [MaterialsController::class, 'filterMaterials'])->name('materials.filter');
 	Route::get('/{id}', [MaterialsController::class, 'showMaterial'])->name('materials.show');
 	Route::middleware(['auth'])->group(function () {
 		Route::post('/{id}/AddComment', [MaterialsController::class, 'addComment'])->name('materials.commend.add');

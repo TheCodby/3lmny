@@ -28,15 +28,15 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarContent">
 				<ul class="navbar-nav ms-auto">
-						<li class="nav-item ms-1 mt-1 mt-md-0"><a type="button" href="{{ route('materials') }}" class="btn btn-outline-primary navbar-btn menu-item"><i class="fas fa-book"></i> {{ ucfirst(__('buttons.materials')) }}</a></li>
+						<li class="nav-item ms-1 mt-1 mt-md-0"><a type="button" href="{{ route('materials') }}" class="btn btn-outline-primary navbar-btn menu-item"><i data-feather="book" stroke-width='2' width='20px' height='20px'></i> {{ ucfirst(__('buttons.materials')) }}</a></li>
 						@guest
-							<li class="nav-item ms-1 mt-1 mt-md-0"><a type="button" class="btn btn-primary navbar-btn menu-item" href="{{ route('login') }}"><i class="fas fa-user"></i> {{ ucfirst(__('buttons.login')) }}</a></li>
+							<li class="nav-item ms-1 mt-1 mt-md-0"><a type="button" class="btn btn-primary navbar-btn menu-item" href="{{ route('login') }}"><i data-feather="user" stroke-width='2' width='20px' height='20px'></i> {{ ucfirst(__('buttons.login')) }}</a></li>
 						@endguest
 					@auth
-						<li class="nav-item ms-1 mt-1 mt-md-0"><a type="button" class="btn btn-gold navbar-btn menu-item"><i class="fas fa-hand-holding-usd"></i> {{ ucfirst(__('buttons.donate')) }}</a></li>
+						<li class="nav-item ms-1 mt-1 mt-md-0"><a type="button" class="btn btn-gold navbar-btn menu-item"><i data-feather="dollar-sign" stroke-width='2' width='20px' height='20px'></i> {{ ucfirst(__('buttons.donate')) }}</a></li>
 						<li class='nav-item ms-1 mt-1 mt-md-0'><div class="dropdown">
 						<a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-							<i class="fas fa-user-circle"></i> {{ Auth::user()->username }}
+							<i data-feather="user"></i> {{ Auth::user()->username }}
 						</a>
 						@if(app()->getLocale() == 'ar')
 							<ul class="dropdown-menu" style="position:absolute;" aria-labelledby="dropdownMenuLink">

@@ -107,7 +107,7 @@
 	$.fn.tagsInput = function(options) {
 		var settings = jQuery.extend({
 			interactive: true,
-			placeholder: 'Add "," between keywords',
+			placeholder: 'Computer Science, Physics, English',
 			minChars: 0,
 			maxChars: null,
 			limit: null,
@@ -120,6 +120,7 @@
 			unique: true,
 			removeWithBackspace: true,
 			whitelist: null
+
 		}, options);
 
 		var uniqueIdCounter = 0;
