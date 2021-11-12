@@ -20,7 +20,8 @@ class CreateMaterialsTable extends Migration
             $table->string('url');
             $table->string('type');
 			$table->string('level'); 
-			$table->string('keywords'); 
+			$table->string('keywords');
+            $table->integer('rate')->default(0); 
             $table->timestamps();
         });
     }

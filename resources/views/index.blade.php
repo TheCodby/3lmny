@@ -34,10 +34,10 @@
 						</button>
 					<div class="collapse navbar-collapse" id="navbarContent">
 						<ul class="navbar-nav index ms-auto">
-								<li class="nav-item ms-2 mt-2 mt-md-0 fs-6"><a type="button" href="{{ route('materials') }}" class="navbar-btn menu-item button3 btn btn-link"> {{ ucfirst(__('buttons.materials')) }}</a></li>
+								<li class="nav-item ms-2 mt-2 mt-md-0 fs-6"><a type="button" href="{{ route('materials') }}" class="navbar-btn menu-item button3 btn btn-link"><i data-feather="book-open" stroke-width='2' width='22px' height='22px'></i> {{ ucfirst(__('buttons.materials')) }}</a></li>
 								@guest
-									<li class="nav-item ms-2 mt-2 mt-md-0 fs-6"><a type="button" class="menu-item button3 btn btn-link" href="{{ route('login') }}"> {{ ucfirst(__('buttons.login')) }}</a></li>
-									<li class="nav-item ms-2 mt-2 mt-md-0 fs-6"><a type="button" class="btn btn-primary fw-bold" href="{{ route('register') }}">{{ __('buttons.joinnow') }}</a></li>
+									<li class="nav-item ms-2 mt-2 mt-md-0 fs-6"><a type="button" class="menu-item button3 btn btn-link" href="{{ route('login') }}"><i data-feather="log-in" stroke-width='2' width='22px' height='22px'></i> {{ ucfirst(__('buttons.login')) }}</a></li>
+									<li class="nav-item ms-2 mt-2 mt-md-0 fs-6"><a type="button" class="btn btn-primary fw-bold" href="{{ route('register') }}"><i data-feather="user-plus" stroke-width='2' width='22px' height='22px'></i> {{ __('buttons.joinnow') }}</a></li>
 								@endguest
 							@auth
 								<li class="nav-item ms-2 mt-2 mt-md-0 fs-6"><a type="button" href="#" class="navbar-btn menu-item button3 btn btn-link"> {{ ucfirst(__('buttons.donate')) }}</a></li>
@@ -53,7 +53,7 @@
 									<li><a class="dropdown-item" href="{{route('admin')}}">Admin Panel</a></li>
 									@endif
 									<li><hr class="dropdown-divider"></li>
-									<li><a class="dropdown-item" href="{{route('logout')}}">{{ucfirst(__('buttons.logout'))}}</a></li>
+									<li><a class="dropdown-item" href="{{route('logout')}}"><i data-feather="log-out" stroke-width='2' width='22px' height='22px'></i> {{ucfirst(__('buttons.logout'))}}</a></li>
 									
 								</ul>
 								</div>

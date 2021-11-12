@@ -11460,3 +11460,8 @@ textarea.form-control-lg {
 textarea {
   resize: none;
 }
+
+.rating__star {
+  cursor: pointer;
+  color: #dabd18b2;
+}

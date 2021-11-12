@@ -37,12 +37,12 @@
                         @endforeach
                         <p class='mt-2'>{{$material->description}}</p>
                         <div class='d-flex justify-content-between'>
-                            <div style='align-self: center;'>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
+                            <div class="rating" style='align-self: center;'>
+                                <i class="rating__star far fa-star"></i>
+                                <i class="rating__star far fa-star"></i>
+                                <i class="rating__star far fa-star"></i>
+                                <i class="rating__star far fa-star"></i>
+                                <i class="rating__star far fa-star"></i>
                             </div>
                             <a href="{{$material->url}}" class="btn btn-primary float-end"><i class="fas fa-box-open"></i> Open</a>
                         </div>
@@ -96,4 +96,45 @@
             </div>
         </div>
     </div>
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        const ratingStars = [...document.getElementsByClassName("rating__star")];
+        let i2 = 0;
+        for (i2; i2 < {{$rate}}; i2++)
+        {
+            ratingStars[i2].className = "rating__star fas fa-star";
+        }
+        function executeRating(stars) {
+            const starClassActive = "rating__star fas fa-star";
+            const starClassInactive = "rating__star far fa-star";
+            const starsLength = stars.length;
+            let i;
+            stars.map((star) => {
+                star.onclick = () => {
+                    let active = 0;
+                    i = stars.indexOf(star);
+                    if (star.className===starClassInactive) {
+                        for (i; i >= 0; --i)
+                        {
+                            stars[i].className = starClassActive;
+                            active++;
+                        }
+                    } else {
+                        for (i; i < starsLength; ++i) stars[i].className = starClassInactive;
+                    }
+                    console.log(active)
+                    request = $.ajax({
+                        url: "{{route('materials.rate', $material->id)}}",
+                        type: "post",
+                        data: {"rate": active},
+                    });
+                };
+            });
+        }
+        executeRating(ratingStars);
+    </script>
 @endsection

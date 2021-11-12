@@ -34,10 +34,10 @@
 						</button>
 					<div class="collapse navbar-collapse" id="navbarContent">
 						<ul class="navbar-nav index ms-auto">
-								<li class="nav-item ms-2 mt-2 mt-md-0 fs-6"><a type="button" href="<?php echo e(route('materials')); ?>" class="navbar-btn menu-item button3 btn btn-link"> <?php echo e(ucfirst(__('buttons.materials'))); ?></a></li>
+								<li class="nav-item ms-2 mt-2 mt-md-0 fs-6"><a type="button" href="<?php echo e(route('materials')); ?>" class="navbar-btn menu-item button3 btn btn-link"><i data-feather="book-open" stroke-width='2' width='22px' height='22px'></i> <?php echo e(ucfirst(__('buttons.materials'))); ?></a></li>
 								<?php if(auth()->guard()->guest()): ?>
-									<li class="nav-item ms-2 mt-2 mt-md-0 fs-6"><a type="button" class="menu-item button3 btn btn-link" href="<?php echo e(route('login')); ?>"> <?php echo e(ucfirst(__('buttons.login'))); ?></a></li>
-									<li class="nav-item ms-2 mt-2 mt-md-0 fs-6"><a type="button" class="btn btn-primary fw-bold" href="<?php echo e(route('register')); ?>"><?php echo e(__('buttons.joinnow')); ?></a></li>
+									<li class="nav-item ms-2 mt-2 mt-md-0 fs-6"><a type="button" class="menu-item button3 btn btn-link" href="<?php echo e(route('login')); ?>"><i data-feather="log-in" stroke-width='2' width='22px' height='22px'></i> <?php echo e(ucfirst(__('buttons.login'))); ?></a></li>
+									<li class="nav-item ms-2 mt-2 mt-md-0 fs-6"><a type="button" class="btn btn-primary fw-bold" href="<?php echo e(route('register')); ?>"><i data-feather="user-plus" stroke-width='2' width='22px' height='22px'></i> <?php echo e(__('buttons.joinnow')); ?></a></li>
 								<?php endif; ?>
 							<?php if(auth()->guard()->check()): ?>
 								<li class="nav-item ms-2 mt-2 mt-md-0 fs-6"><a type="button" href="#" class="navbar-btn menu-item button3 btn btn-link"> <?php echo e(ucfirst(__('buttons.donate'))); ?></a></li>
@@ -54,7 +54,7 @@
 									<li><a class="dropdown-item" href="<?php echo e(route('admin')); ?>">Admin Panel</a></li>
 									<?php endif; ?>
 									<li><hr class="dropdown-divider"></li>
-									<li><a class="dropdown-item" href="<?php echo e(route('logout')); ?>"><?php echo e(ucfirst(__('buttons.logout'))); ?></a></li>
+									<li><a class="dropdown-item" href="<?php echo e(route('logout')); ?>"><i data-feather="log-out" stroke-width='2' width='22px' height='22px'></i> <?php echo e(ucfirst(__('buttons.logout'))); ?></a></li>
 									
 								</ul>
 								</div>

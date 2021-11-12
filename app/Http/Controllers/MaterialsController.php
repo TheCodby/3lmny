@@ -7,9 +7,11 @@ use App\Models\Material;
 use App\Models\MaterialsTypes;
 use App\Models\Level;
 use App\Models\Comment;
+use App\Models\Rate;
 use Carbon\Carbon;
 use Auth;
 use Validator;
+use DB;
 
 class MaterialsController extends Controller
 {
@@ -40,10 +42,11 @@ class MaterialsController extends Controller
         {
             $commant['created'] = Carbon::parse($commant->created_at)->diffForHumans();
         }
+        $rate = Rate::where('m_id', '=', $id)->where('u_id', '=', Auth::id())->value('rate');
         $material = Material::find($id);
         if($material)
         {
-            return view('materials.show', ['material' => Material::find($id), 'comments' => $comments]);
+            return view('materials.show', ['material' => Material::find($id), 'comments' => $comments, 'rate' => $rate]);
         }
         else
         {
@@ -112,5 +115,16 @@ class MaterialsController extends Controller
             $material['updated'] = Carbon::parse($material->updated_at)->diffForHumans();
         }
         return view('materials.home', ['materials' => $materials, 'types' => MaterialsTypes::all(), 'levels' => Level::all()]);
+    }
+    public function rateMaterial(String $id, Request $request)
+    {
+        $validator = Validator::make($request->all(),[
+            'rate' => 'required|integer|min:0|max:5',
+        ]);
+        if($validator->fails())
+        {
+            abort(404);
+        }
+        $update = Rate::updateOrInsert(['u_id' => Auth::id(), 'm_id' => $id], ['rate' => $request->rate]);
     }
 }
