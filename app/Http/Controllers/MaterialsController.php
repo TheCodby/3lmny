@@ -23,7 +23,7 @@ class MaterialsController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $materials = Material::with('materialTypes')->with('levelName')->orderBy('id', 'DESC')->paginate(15);
+        $materials = Material::with('typeRow')->with('levelRow')->orderBy('id', 'DESC')->paginate(15);
         foreach($materials as $material)
         {
             $material['updated'] = Carbon::parse($material->updated_at)->diffForHumans();
@@ -42,7 +42,7 @@ class MaterialsController extends Controller
         {
             $commant['created'] = Carbon::parse($commant->created_at)->diffForHumans();
         }
-        $rate = Rate::where('m_id', '=', $id)->where('u_id', '=', Auth::id())->value('rate');
+        $rate = Rate::where('m_id', '=', $id)->where('u_id', '=', Auth::id())->value('rate') ?? 0;
         $material = Material::find($id);
         if($material)
         {

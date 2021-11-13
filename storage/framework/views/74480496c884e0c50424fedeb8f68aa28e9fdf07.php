@@ -88,7 +88,7 @@
 					<th scope="row"><?php echo e($material->id); ?></th>
 					<td><?php echo e($material->subject); ?></td>
 					<?php
-						@$keywords = json_decode($material->keywords)
+						@$keywords = explode(",", $material->keywords)
 					?>
 					<td>
 					<?php $__currentLoopData = $keywords; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $keyword): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>

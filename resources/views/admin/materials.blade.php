@@ -88,7 +88,7 @@
 					<th scope="row">{{$material->id}}</th>
 					<td>{{$material->subject}}</td>
 					@php
-						@$keywords = json_decode($material->keywords)
+						@$keywords = explode(",", $material->keywords)
 					@endphp
 					<td>
 					@foreach ($keywords as $keyword)

@@ -22,7 +22,7 @@ class ProfileController extends Controller
     }
     public function showCompleteProfile()
     {        
-        return view('profile.complete', ['levels' => Level::all(), 'user' => User::select('age', 'level', 'major', 'interests')->with('levelName')->find(Auth::id())]);
+        return view('profile.complete', ['levels' => Level::all(), 'user' => User::select('age', 'level', 'major', 'interests')->with('levelRow')->find(Auth::id())]);
     }
     public function completeProfile(Request $request)
     {

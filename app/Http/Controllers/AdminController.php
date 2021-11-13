@@ -55,11 +55,11 @@ class AdminController extends Controller
 		$data = request(['subject', 'description', 'url', 'type', 'level']);
 		$data['keywords'] = $keywords;
 		$material = Material::create($data);
-		$materials = Material::with('materialTypes')->with('levelName')->get()->where('id', '=', $material->id);
+		$materials = Material::with('typeRow')->with('levelRow')->get()->where('id', '=', $material->id);
 		if($material)
 		{
 			$discordMsg = new DiscordWebhook();
-			$discordMsg->SendNotification("We Added ".$material->subject, $material->description, url("/Materials/{$material->id}"), $material->materialTypes->name, $material->levelName->name);
+			$discordMsg->SendNotification("We Added ".$material->subject, $material->description, url("/Materials/{$material->id}"), $material->type->name, $material->level->name);
 			return redirect()
 				->route('admin')
 				->with('message', 'Successfully created a material '. $request->subject);
@@ -164,5 +164,40 @@ class AdminController extends Controller
 			return redirect()
 				->route('admin');
 		}
+	}
+	public function showEditMaterial(String $id)
+	{
+		return view('admin.materials.edit', ['material' => Material::with('typeRow')->with('levelRow')->find($id), 'types' => MaterialsTypes::all(), 'levels' => Level::all()]);
+	}
+	public function EditMaterial(Request $request, $id)
+	{
+		$validator = Validator::make($request->all(), [
+			'subject' => 'required|string',
+			'description' => 'required|string',
+			'url' => 'required|string',
+			'type' => 'required|numeric',
+			'level' => 'required|numeric',
+			'keywords' => 'nullable|string',
+		]);
+		if($validator->fails())
+		{
+			return redirect()
+				->route('admin.materials.edit', $id)
+				->withErrors($validator)
+				->withInput();
+		}
+		$keywords = explode(',', $request->keywords);
+		$keywords = json_encode($keywords);
+		$update = Material::where('id', '=', $id)->update(['subject' => $request->subject, 'description' => $request->description, 'url' => $request->url, 'type' => $request->type, 'level' => $request->level, 'keywords' => $request->keywords]);
+        if($update)
+        {
+            return redirect()
+				->route('admin.materials.edit', $id)
+                ->with('message', 'Successfully edited this material.');
+        }else{
+            return redirect()
+				->route('admin.materials.edit', $id)
+				->withInput();
+        }
 	}
 }

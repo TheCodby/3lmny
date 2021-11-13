@@ -44,9 +44,9 @@
                                     <div class="form-group">
                                     <label for="level" class="form-label">Your Level</label>
                                         <select class="form-select" id="level" name='level' aria-label="">
-                                            <option value="{{$user->levelName->id}}" selected>{{$user->levelName->name}}</option>
+                                            <option value="{{$user->levelRow->id}}" selected>{{$user->levelRow->name}}</option>
                                             @foreach ($levels as $level)
-                                                @if($level->id != $user->levelName->id)
+                                                @if($level->id != $user->levelRow->id)
                                                     <option value="{{$level->id}}">{{$level->name}}</option>
                                                 @endif
                                             @endforeach
@@ -55,7 +55,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                    <label for="major" class="form-label">Your Major</label>
+                                        <label for="major" class="form-label">Your Major</label>
                                         <input type="text" name='major' value='{{$user->major}}' class="form-control" id="major" placeholder="Computer Science, Math, English">
                                     </div>
                                 </div>

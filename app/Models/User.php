@@ -48,7 +48,7 @@ class User extends Authenticatable
     {
         $this->attributes['password'] = Hash::make($password);
     }
-    public function levelName(){
+    public function levelRow(){
         return $this->belongsTo(Level::class, 'level');
     }
 }

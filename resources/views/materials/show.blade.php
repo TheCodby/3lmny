@@ -30,12 +30,13 @@
                     <div class="card-body">
                         <h2 class="card-title">{{$material->subject}}</h2>
                         @php
-                            @$keywords = json_decode($material->keywords)
+                            @$keywords = explode(",", $material->keywords)
                         @endphp
                         @foreach ($keywords as $keyword)
                             <p class="badge rounded-pill bg-primary mb-0 fs-6">{{$keyword}}</p>
                         @endforeach
                         <p class='mt-2'>{{$material->description}}</p>
+                        @auth
                         <div class='d-flex justify-content-between'>
                             <div class="rating" style='align-self: center;'>
                                 <i class="rating__star far fa-star"></i>
@@ -46,6 +47,7 @@
                             </div>
                             <a href="{{$material->url}}" class="btn btn-primary float-end"><i class="fas fa-box-open"></i> Open</a>
                         </div>
+                        @endauth
                     </div>
                 </div>
             </div>
@@ -97,16 +99,11 @@
         </div>
     </div>
     <script>
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
         const ratingStars = [...document.getElementsByClassName("rating__star")];
-        let i2 = 0;
-        for (i2; i2 < {{$rate}}; i2++)
+        let stars = 0;
+        for (stars; stars < {{$rate}}; stars++)
         {
-            ratingStars[i2].className = "rating__star fas fa-star";
+            ratingStars[stars].className = "rating__star fas fa-star";
         }
         function executeRating(stars) {
             const starClassActive = "rating__star fas fa-star";
@@ -115,18 +112,18 @@
             let i;
             stars.map((star) => {
                 star.onclick = () => {
-                    let active = 0;
                     i = stars.indexOf(star);
                     if (star.className===starClassInactive) {
                         for (i; i >= 0; --i)
                         {
                             stars[i].className = starClassActive;
-                            active++;
                         }
                     } else {
-                        for (i; i < starsLength; ++i) stars[i].className = starClassInactive;
+                        for (i; i < starsLength; ++i) {
+                            stars[i].className = starClassInactive;
+                        }
                     }
-                    console.log(active)
+                    let active = $('.fas.fa-star').length
                     request = $.ajax({
                         url: "{{route('materials.rate', $material->id)}}",
                         type: "post",
