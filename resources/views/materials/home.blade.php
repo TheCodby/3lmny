@@ -50,7 +50,7 @@
 					<div class="row mb-3">
 						<div class="col-sm-12 mx-auto">
 							<div class="card shadow card-hover custom-card">
-							<img src="{{asset($material->image->path) ?? ''}}" class="img-fluid card-img">
+							<img src="{{asset('storage/uploads/materials/'.$material->image->path) ?? ''}}" class="img-fluid card-img">
 								<div class="card-body">
 									<div class='ms-2'>
 									<h5 class="card-title mb-0">{{$material->subject}}</h5>

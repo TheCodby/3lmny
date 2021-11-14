@@ -55,8 +55,9 @@ class AdminController extends Controller
 		#upload image in public file
 		$saveFile = new File();
 		$name = $request->file('image')->getClientOriginalName();
-		$path = $request->file('image')->store('public/materials');
-		$file = File::create(['name' => $name, 'path' => $path]);
+		$file_name = $request->file('image')->hashName();
+		$path = $request->file('image')->store('public/uploads/materials');
+		$file = File::create(['name' => $name, 'path' => $file_name]);
 		###
 		$data = request(['subject', 'description', 'url', 'type', 'level', 'keywords']);
 		$data['image_id'] = $file->id;
