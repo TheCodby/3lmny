@@ -23,7 +23,7 @@
 			</div>
 			@endif
             <div class="col-md-4 mb-3 order-md-2">
-                <img src="{{asset('images/materials/1.jpeg')}}" class="img-fluid hoverimage" style='border-radius:30px;'>
+                <img src="{{asset($material->image->path) ?? ''}}" class="img-fluid hoverimage" style='border-radius:30px;'>
             </div>
             <div class="col-md-8 mb-3 order-md-1">
                 <div class="card shadow">

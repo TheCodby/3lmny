@@ -1,5 +1,5 @@
 <div class="modal fade" id="addMaterial" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-	<form method='POST' action='<?php echo e(route("admin.materials.add")); ?>'>
+	<form method='POST' action='<?php echo e(route("admin.materials.add")); ?>' enctype="multipart/form-data">
 		<?php echo csrf_field(); ?>
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -52,7 +52,7 @@
 						<div class="form-group row">
 							<div class="col-12">
 								<label for="formFile" class="form-label">Images</label>
-								<input class="form-control" type="file" id="formFile">
+								<input class="form-control" name='image' type="file" id="formFile">
 							</div>
 						</div>
 					</div>

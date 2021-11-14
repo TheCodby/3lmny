@@ -39,8 +39,6 @@ class ProfileController extends Controller
 				->withErrors($validator)
 				->withInput();
 		}
-        $interests = explode(',', $request->interests);
-		$interests = json_encode($interests);
         $update = User::where('id', '=', Auth::id())->update(['age' => $request->age, 'level' => $request->level, 'major' => $request->major, 'interests' => $request->interests]);
         if($update)
         {

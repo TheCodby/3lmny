@@ -7,6 +7,7 @@ use Validator;
 use App\Models\Material;
 use App\Models\MaterialsTypes;
 use App\Models\Level;
+use App\Models\File;
 use App\Discord\DiscordWebhook;
 use Carbon\Carbon;
 
@@ -42,6 +43,7 @@ class AdminController extends Controller
 			'type' => 'required|numeric',
 			'level' => 'required|numeric',
 			'keywords' => 'nullable|string',
+			'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
 		]);
 		if($validator->fails())
 		{
@@ -50,16 +52,20 @@ class AdminController extends Controller
 				->withErrors($validator)
 				->withInput();
 		}
-		$keywords = explode(',', $request->keywords);
-		$keywords = json_encode($keywords);
-		$data = request(['subject', 'description', 'url', 'type', 'level']);
-		$data['keywords'] = $keywords;
+		#upload image in public file
+		$saveFile = new File();
+		$name = $request->file('image')->getClientOriginalName();
+		$path = $request->file('image')->store('public/materials');
+		$file = File::create(['name' => $name, 'path' => $path]);
+		###
+		$data = request(['subject', 'description', 'url', 'type', 'level', 'keywords']);
+		$data['image_id'] = $file->id;
 		$material = Material::create($data);
 		$materials = Material::with('typeRow')->with('levelRow')->get()->where('id', '=', $material->id);
 		if($material)
 		{
 			$discordMsg = new DiscordWebhook();
-			$discordMsg->SendNotification("We Added ".$material->subject, $material->description, url("/Materials/{$material->id}"), $material->type->name, $material->level->name);
+			$discordMsg->SendNotification("We Added ".$material->subject, $material->description, url("/Materials/{$material->id}"), $material->typeRow->name, $material->levelRow->name);
 			return redirect()
 				->route('admin')
 				->with('message', 'Successfully created a material '. $request->subject);
