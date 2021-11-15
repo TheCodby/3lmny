@@ -40,7 +40,7 @@
 						<div class="form-group row">
 							<div class="col-12">
 								<label for="basic-url" class="form-label">URL</label>
-								<input type="text" name='url' id='url' class="form-control">
+								<input type="url" name='url' id='url' class="form-control">
 							</div>
 						</div>
 						<div class="form-group row">
@@ -51,7 +51,7 @@
 						</div>
 						<div class="form-group row">
 							<div class="col-12">
-								<label for="formFile" class="form-label">Images</label>
+								<label for="formFile" class="form-label">Image</label>
 								<input class="form-control" name='image' type="file" id="formFile">
 							</div>
 						</div>

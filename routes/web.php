@@ -52,6 +52,7 @@ Route::prefix('Materials')->group(function () {
 	Route::get('/Filter', [MaterialsController::class, 'filterMaterials'])->name('materials.filter');
 	Route::get('/{id}', [MaterialsController::class, 'showMaterial'])->name('materials.show');
 	Route::middleware(['auth'])->group(function () {
+		Route::post('/{id}/Bookmark', [MaterialsController::class, 'bookmarkMaterial'])->name('materials.bookmark');
 		Route::post('/{id}/Rate', [MaterialsController::class, 'rateMaterial'])->name('materials.rate');
 		Route::post('/{id}/AddComment', [MaterialsController::class, 'addComment'])->name('materials.commend.add');
 		Route::get('/{id}/DeleteComment/{commentID}', [MaterialsController::class, 'deleteComment'])->name('materials.commend.delete');

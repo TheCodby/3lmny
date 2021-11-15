@@ -28,7 +28,7 @@
             <div class="col-md-8 mb-3 order-md-1">
                 <div class="card shadow">
                     <div class="card-body">
-                        <h2 class="card-title">{{$material->subject}}</h2>
+                        <h2 class="card-title">{{$material->subject}} @auth <i class="far fa-bookmark" style='cursor: pointer; color:#dabd18b2' id='bookmark'></i> @endauth</h2>
                         @php
                             @$keywords = explode(",", $material->keywords)
                         @endphp
@@ -99,6 +99,21 @@
         </div>
     </div>
     <script>
+        @if($isBookmarked)
+            $('#bookmark').toggleClass("far fas") ;
+        @endif
+        $( "#bookmark" ).click(function() {
+            $('#bookmark').toggleClass("far fas") ;
+            request = $.ajax({
+                url: "{{route('materials.bookmark', $material->id)}}",
+                type: "post",
+                success: function(response)
+                {
+                    console.log(response);
+                }
+            })
+        });
+        //
         const ratingStars = [...document.getElementsByClassName("rating__star")];
         let stars = 0;
         for (stars; stars < {{$rate}}; stars++)

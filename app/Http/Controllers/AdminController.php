@@ -39,7 +39,7 @@ class AdminController extends Controller
 		$validator = Validator::make($request->all(), [
 			'subject' => 'required|string',
 			'description' => 'required|string',
-			'url' => 'required|string',
+			'url' => 'required|url',
 			'type' => 'required|numeric',
 			'level' => 'required|numeric',
 			'keywords' => 'nullable|string',
@@ -53,7 +53,6 @@ class AdminController extends Controller
 				->withInput();
 		}
 		#upload image in public file
-		$saveFile = new File();
 		$name = $request->file('image')->getClientOriginalName();
 		$file_name = $request->file('image')->hashName();
 		$path = $request->file('image')->store('public/uploads/materials');
@@ -174,17 +173,18 @@ class AdminController extends Controller
 	}
 	public function showEditMaterial(String $id)
 	{
-		return view('admin.materials.edit', ['material' => Material::with('typeRow')->with('levelRow')->find($id), 'types' => MaterialsTypes::all(), 'levels' => Level::all()]);
+		return view('admin.materials.edit', ['material' => Material::with('typeRow')->with('image')->with('levelRow')->find($id), 'types' => MaterialsTypes::all(), 'levels' => Level::all()]);
 	}
 	public function EditMaterial(Request $request, $id)
 	{
 		$validator = Validator::make($request->all(), [
 			'subject' => 'required|string',
 			'description' => 'required|string',
-			'url' => 'required|string',
+			'url' => 'required|url',
 			'type' => 'required|numeric',
 			'level' => 'required|numeric',
 			'keywords' => 'nullable|string',
+			'image' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
 		]);
 		if($validator->fails())
 		{
@@ -193,10 +193,20 @@ class AdminController extends Controller
 				->withErrors($validator)
 				->withInput();
 		}
+		$data = request(['subject', 'description', 'url', 'type', 'level', 'keywords']);
+		if($request->file('image'))
+		{
+			#upload image in public file
+			$name = $request->file('image')->getClientOriginalName();
+			$file_name = $request->file('image')->hashName();
+			$path = $request->file('image')->store('public/uploads/materials');
+			$file = File::create(['name' => $name, 'path' => $file_name]);
+			$data['image_id'] = $file->id;
+		}
 		$keywords = explode(',', $request->keywords);
 		$keywords = json_encode($keywords);
-		$update = Material::where('id', '=', $id)->update(['subject' => $request->subject, 'description' => $request->description, 'url' => $request->url, 'type' => $request->type, 'level' => $request->level, 'keywords' => $request->keywords]);
-        if($update)
+		$update = Material::where('id', '=', $id)->update($data);
+		if($update)
         {
             return redirect()
 				->route('admin.materials.edit', $id)

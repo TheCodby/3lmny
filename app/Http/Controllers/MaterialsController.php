@@ -8,6 +8,7 @@ use App\Models\MaterialsTypes;
 use App\Models\Level;
 use App\Models\Comment;
 use App\Models\Rate;
+use App\Models\Bookmark;
 use Carbon\Carbon;
 use Auth;
 use Validator;
@@ -43,10 +44,11 @@ class MaterialsController extends Controller
             $commant['created'] = Carbon::parse($commant->created_at)->diffForHumans();
         }
         $rate = Rate::where('m_id', '=', $id)->where('u_id', '=', Auth::id())->value('rate') ?? 0;
+        $isBookmarked = Bookmark::where('m_id', '=', $id)->where('u_id', '=', Auth::id())->exists();
         $material = Material::with('image')->find($id);
         if($material)
         {
-            return view('materials.show', ['material' => Material::find($id), 'comments' => $comments, 'rate' => $rate]);
+            return view('materials.show', ['material' => Material::find($id), 'comments' => $comments, 'rate' => $rate, 'isBookmarked' => $isBookmarked]);
         }
         else
         {
@@ -126,5 +128,21 @@ class MaterialsController extends Controller
             abort(404);
         }
         $update = Rate::updateOrInsert(['u_id' => Auth::id(), 'm_id' => $id], ['rate' => $request->rate]);
+    }
+    public function bookmarkMaterial(String $id, Request $request)
+    {
+        # if bookmark exist delete it and if not exist create it.
+        $bookmark = Bookmark::where(['u_id' => Auth::id(), 'm_id' => $id]);
+        if($bookmark->count() == 0)
+        {
+            $newbookmark = new Bookmark();
+            $newbookmark->u_id = Auth::id();
+            $newbookmark->m_id = $id;
+            $newbookmark->save();
+            return ('Sucssfully added bookmark '.$id);
+        }else{
+            $bookmark->delete();
+            return 'Sucssfully deleted bookmark '.$id;
+        }
     }
 }

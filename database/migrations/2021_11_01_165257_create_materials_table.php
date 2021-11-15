@@ -15,11 +15,11 @@ class CreateMaterialsTable extends Migration
     {
         Schema::create('materials', function (Blueprint $table) {
             $table->id();
-            $table->string('subject');
+            $table->text('subject');
             $table->longText('description');
-            $table->string('url');
-            $table->string('type');
-			$table->string('level'); 
+            $table->url('url');
+            $table->integer('type');
+			$table->integer('level'); 
 			$table->text('keywords')->nullable();
             $table->integer('rate')->default(0); 
             $table->timestamps();
