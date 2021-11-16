@@ -43,9 +43,9 @@
 						@else
 							<ul class="dropdown-menu dropdown-menu-end" style="position:absolute;" aria-labelledby="dropdownMenuLink">
 						@endif
-							<li><a class="dropdown-item" href="#">Profile</a></li>
+							<li><a class="dropdown-item" href="{{route('myprofile')}}">Profile</a></li>
 							<li><a class="dropdown-item" href="#">Settings</a></li>
-							<li><a class="dropdown-item" href="#">Bookmarks</a></li>
+							<li><a class="dropdown-item" href="{{route('materials.bookmarks')}}">Bookmarks</a></li>
 							@if(Auth::user()->user_type == '2')
 							<li><a class="dropdown-item" href="{{route('admin')}}">Admin Panel</a></li>
 							@endif

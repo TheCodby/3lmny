@@ -145,4 +145,19 @@ class MaterialsController extends Controller
             return 'Sucssfully deleted bookmark '.$id;
         }
     }
+    public function bookmarks()
+    {
+        $bookmarks = DB::table('materials')
+        ->join('bookmarks', 'materials.id', '=', 'bookmarks.m_id')
+        ->join('files', 'materials.image_id', '=', 'files.id')
+        ->where('u_id', '=', Auth::id())
+        ->orderBy('materials.id', 'DESC')
+        ->select(['materials.id', 'materials.subject', 'materials.image_id', 'materials.description', 'materials.updated_at', 'files.path'])
+        ->paginate(15);
+        foreach($bookmarks as $material)
+        {
+            $material->updated = Carbon::parse($material->updated_at)->diffForHumans();
+        }
+        return view('materials.bookmarks', ['bookmarks' => $bookmarks]);
+    }
 }

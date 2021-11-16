@@ -38,8 +38,10 @@ Route::middleware(['guest'])->group(function () {
 	});
 });
 Route::middleware(['auth'])->group(function () {
+	Route::get('/Bookmarks', [MaterialsController::class, 'bookmarks'])->name('materials.bookmarks');
 	Route::prefix('Profile')->group(function () {
-		Route::get('', ProfileController::class)->name('profile.complete');
+		Route::get('', ProfileController::class)->name('myprofile');
+		Route::get('{id}', [ProfileController::class, 'showProfile'])->name('profile');
 		Route::get('Complete', [ProfileController::class, 'showCompleteProfile'])->name('profile.complete');
 		Route::post('Complete', [ProfileController::class, 'completeProfile'])->name('profile.complete');
 	});

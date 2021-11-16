@@ -22,4 +22,5 @@ return [
 	'admin' => 'Admin',
     'materials' => 'Materials',
     'completeprofile' => 'Complete your profile',
+    'bookmarks' => 'Bookmarks',
 ];

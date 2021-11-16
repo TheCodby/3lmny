@@ -1,6 +1,6 @@
 @extends('templates.layout')
 
-@section('title', __('titles.admin'))
+@section('title', $material->subject)
 
 @section('content')
     <div class="container">

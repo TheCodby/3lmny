@@ -18,7 +18,7 @@ class ProfileController extends Controller
      */
     public function __invoke(Request $request)
     {
-        //
+        return view('profile.show', ['user' => User::find(Auth::id())]);
     }
     public function showCompleteProfile()
     {        
@@ -50,5 +50,9 @@ class ProfileController extends Controller
 				->route('profile.complete')
 				->withInput();
         }
+    }
+    public function showProfile(String $id)
+    {
+        echo 'hi';
     }
 }
