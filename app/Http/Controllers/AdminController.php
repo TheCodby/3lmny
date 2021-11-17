@@ -65,7 +65,8 @@ class AdminController extends Controller
 		if($material)
 		{
 			$discordMsg = new DiscordWebhook();
-			$discordMsg->SendNotification("We Added ".$material->subject, $material->description, url("/Materials/{$material->id}"), $material->typeRow->name, $material->levelRow->name);
+			$discordMsg->SendNotification("We Added ".$material->subject, $material->description, url("/Materials/{$material->id}"), $material->typeRow->name, $material->levelRow->name, asset('storage/uploads/materials/'.$file_name));
+			dd($discordMsg);
 			return redirect()
 				->route('admin')
 				->with('message', 'Successfully created a material '. $request->subject);
