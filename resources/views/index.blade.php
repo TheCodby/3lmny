@@ -34,26 +34,26 @@
 						</button>
 					<div class="collapse navbar-collapse" id="navbarContent">
 						<ul class="navbar-nav index ms-auto">
-								<li class="nav-item ms-2 mt-2 mt-md-0 fs-6"><a type="button" href="{{ route('materials') }}" class="navbar-btn menu-item button3 btn btn-link"><i data-feather="book-open" stroke-width='2' width='22px' height='22px'></i> {{ ucfirst(__('buttons.materials')) }}</a></li>
+								<li class="nav-item ms-2 mt-2 mt-md-0 fs-6"><a type="button" href="{{ route('materials') }}" class="navbar-btn menu-item button3 btn btn-link text-capitalize"><i data-feather="book-open" stroke-width='2' width='22px' height='22px'></i> {{ __('buttons.materials') }}</a></li>
 								@guest
-									<li class="nav-item ms-2 mt-2 mt-md-0 fs-6"><a type="button" class="menu-item button3 btn btn-link" href="{{ route('login') }}"><i data-feather="log-in" stroke-width='2' width='22px' height='22px'></i> {{ ucfirst(__('buttons.login')) }}</a></li>
+									<li class="nav-item ms-2 mt-2 mt-md-0 fs-6"><a type="button" class="menu-item button3 btn btn-link text-capitalize" href="{{ route('login') }}"><i data-feather="log-in" stroke-width='2' width='22px' height='22px'></i> {{ __('buttons.login') }}</a></li>
 									<li class="nav-item ms-2 mt-2 mt-md-0 fs-6"><a type="button" class="btn btn-primary fw-bold" href="{{ route('register') }}"><i data-feather="user-plus" stroke-width='2' width='22px' height='22px'></i> {{ __('buttons.joinnow') }}</a></li>
 								@endguest
 							@auth
-								<li class="nav-item ms-2 mt-2 mt-md-0 fs-6"><a type="button" href="#" class="navbar-btn menu-item button3 btn btn-link"> {{ ucfirst(__('buttons.donate')) }}</a></li>
+								<li class="nav-item ms-2 mt-2 mt-md-0 fs-6"><a type="button" href="#" class="navbar-btn menu-item button3 btn btn-link text-capitalize"> {{ __('buttons.donate') }}</a></li>
 								<li class='nav-item ms-2 mt-2 mt-md-0 fs-6'><div class="dropdown">
 								<a class="button3 btn btn-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
 									<i data-feather="user"></i> {{ Auth::user()->username }}
 								</a>
 								<ul class="dropdown-menu dropdown-menu-end" style="position:absolute;" aria-labelledby="dropdownMenuLink">
-									<li><a class="dropdown-item" href="#">Profile</a></li>
+									<li><a class="dropdown-item" href="{{route('myprofile')}}">Profile</a></li>
 									<li><a class="dropdown-item" href="#">Settings</a></li>
-									<li><a class="dropdown-item" href="#">Bookmarks</a></li>
+									<li><a class="dropdown-item" href="{{route('materials.bookmarks')}}">Bookmarks</a></li>
 									@if(Auth::user()->user_type == '2')
 									<li><a class="dropdown-item" href="{{route('admin')}}">Admin Panel</a></li>
 									@endif
 									<li><hr class="dropdown-divider"></li>
-									<li><a class="dropdown-item" href="{{route('logout')}}"><i data-feather="log-out" stroke-width='2' width='22px' height='22px'></i> {{ucfirst(__('buttons.logout'))}}</a></li>
+									<li><a class="dropdown-item text-capitalize" href="{{route('logout')}}"><i data-feather="log-out" stroke-width='2' width='22px' height='22px'></i> {{__('buttons.logout')}}</a></li>
 									
 								</ul>
 								</div>

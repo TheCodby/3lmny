@@ -7,6 +7,7 @@ use App\Models\Level;
 use App\Models\User;
 use Validator;
 use Auth;
+use Carbon\Carbon;
 
 class ProfileController extends Controller
 {
@@ -18,13 +19,14 @@ class ProfileController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return view('profile.show', ['user' => User::find(Auth::id())]);
+        $user = User::with('levelRow')->find(Auth::id());
+        return view('profile.show', ['user' => $user]);
     }
-    public function showCompleteProfile()
+    public function showEditProfile()
     {        
-        return view('profile.complete', ['levels' => Level::all(), 'user' => User::select('age', 'level', 'major', 'interests')->with('levelRow')->find(Auth::id())]);
+        return view('profile.edit', ['levels' => Level::all(), 'user' => User::select('age', 'level', 'major', 'interests')->with('levelRow')->find(Auth::id())]);
     }
-    public function completeProfile(Request $request)
+    public function editProfile(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'age' => 'nullable|integer|between:6,60',
@@ -35,7 +37,7 @@ class ProfileController extends Controller
         if($validator->fails())
 		{
 			return redirect()
-				->route('profile.complete')
+				->route('profile.edit')
 				->withErrors($validator)
 				->withInput();
 		}
@@ -43,16 +45,21 @@ class ProfileController extends Controller
         if($update)
         {
             return redirect()
-				->route('profile.complete')
-                ->with('message', 'Successfully complete your account.');
+				->route('profile.edit')
+                ->with('message', 'Successfully edited your profile.');
         }else{
             return redirect()
-				->route('profile.complete')
+				->route('profile.edit')
 				->withInput();
         }
     }
     public function showProfile(String $id)
     {
-        echo 'hi';
+        $user = User::findOrFail($id);
+        if($$user){
+            return view('profile.show', ['user' => $user]);
+        }else{
+            return redirect()->route('index');
+        }
     }
 }

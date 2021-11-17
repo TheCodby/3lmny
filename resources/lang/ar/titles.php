@@ -21,6 +21,6 @@ return [
 	'browse' => 'تصفح',
 	'admin' => 'الإدارة',
     'materials' => 'المواد',
-    'completeprofile' => 'إكمال حسابك',
+    'editprofile' => 'تعديل ملفك الشخصي',
     'bookmarks' => 'المفضلة',
 ];

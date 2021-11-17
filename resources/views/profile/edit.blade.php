@@ -1,6 +1,6 @@
 @extends('templates.layout')
 
-@section('title', __('titles.completeprofile'))
+@section('title', __('titles.editprofile'))
 
 @section('content')
     <div class="container">
@@ -23,10 +23,9 @@
         <div class="row ">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header fs-4">Complete Your Profile</div>
+                    <div class="card-header fs-4">Edit Your Profile</div>
                     <div class="card-body">
-                        <p class="card-text">Please fill these fields to give you better recommends</p>
-                        <form method='POST' action='{{route("profile.complete")}}'>
+                        <form method='POST' action='{{route("profile.edit")}}'>
                             @csrf
                             <div class="row">
                                 <div class="col-md-4">

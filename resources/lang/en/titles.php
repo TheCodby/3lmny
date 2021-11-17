@@ -21,6 +21,6 @@ return [
 	'browse' => 'Browse',
 	'admin' => 'Admin',
     'materials' => 'Materials',
-    'completeprofile' => 'Complete your profile',
+    'editprofile' => 'Edit your profile',
     'bookmarks' => 'Bookmarks',
 ];

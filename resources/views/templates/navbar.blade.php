@@ -28,12 +28,12 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarContent">
 				<ul class="navbar-nav ms-auto">
-						<li class="nav-item ms-1 mt-1 mt-md-0"><a type="button" href="{{ route('materials') }}" class="btn btn-outline-primary navbar-btn menu-item"><i data-feather="book" stroke-width='2' width='20px' height='20px'></i> {{ ucfirst(__('buttons.materials')) }}</a></li>
+						<li class="nav-item ms-1 mt-1 mt-md-0"><a type="button" href="{{ route('materials') }}" class="btn btn-outline-primary navbar-btn menu-item text-capitalize"><i data-feather="book" stroke-width='2' width='20px' height='20px'></i> {{ __('buttons.materials') }}</a></li>
 						@guest
-							<li class="nav-item ms-1 mt-1 mt-md-0"><a type="button" class="btn btn-primary navbar-btn menu-item" href="{{ route('login') }}"><i data-feather="user" stroke-width='2' width='20px' height='20px'></i> {{ ucfirst(__('buttons.login')) }}</a></li>
+							<li class="nav-item ms-1 mt-1 mt-md-0"><a type="button" class="btn btn-primary navbar-btn menu-item text-capitalize" href="{{ route('login') }}"><i data-feather="user" stroke-width='2' width='20px' height='20px'></i> {{ __('buttons.login') }}</a></li>
 						@endguest
 					@auth
-						<li class="nav-item ms-1 mt-1 mt-md-0"><a type="button" class="btn btn-gold navbar-btn menu-item"><i data-feather="dollar-sign" stroke-width='2' width='20px' height='20px'></i> {{ ucfirst(__('buttons.donate')) }}</a></li>
+						<li class="nav-item ms-1 mt-1 mt-md-0"><a type="button" class="btn btn-gold navbar-btn menu-item text-capitalize"><i data-feather="dollar-sign" stroke-width='2' width='20px' height='20px'></i> {{ __('buttons.donate') }}</a></li>
 						<li class='nav-item ms-1 mt-1 mt-md-0'><div class="dropdown">
 						<a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
 							<i data-feather="user"></i> {{ Auth::user()->username }}
@@ -50,7 +50,7 @@
 							<li><a class="dropdown-item" href="{{route('admin')}}">Admin Panel</a></li>
 							@endif
 							<li><hr class="dropdown-divider"></li>
-							<li><a class="dropdown-item" href="{{route('logout')}}">{{ucfirst(__('buttons.logout'))}}</a></li>
+							<li><a class="dropdown-item text-capitalize" href="{{route('logout')}}">{{__('buttons.logout')}}</a></li>
 							
 						</ul>
 						</div>
