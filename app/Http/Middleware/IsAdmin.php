@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class IsAdmin
 {
@@ -17,12 +18,14 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-		if (Auth::user() &&  Auth::user()->user_type == 2)
-		{
-			return $next($request);
-		} else {
-			return redirect()->route('index');
-		}
-		
+      if (Auth::user() &&  Auth::user()->user_type == 2)
+      {
+        return $next($request);
+      } else {
+        // add warn message in logs.
+        $intruder = Auth::user()->username ?? ''.' | '.$request->ip();
+        Log::channel('admin')->warning($intruder. ' Trying access to admin permessions.');
+        return redirect()->route('index');
+      }
     }
 }

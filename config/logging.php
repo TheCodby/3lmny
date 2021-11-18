@@ -48,6 +48,16 @@ return [
     */
 
     'channels' => [
+        'main' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/main.log'),
+            'level' => 'info',
+        ],
+        'admin' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/admin.log'),
+            'level' => 'info',
+        ],
         'stack' => [
             'driver' => 'stack',
             'channels' => ['single'],
