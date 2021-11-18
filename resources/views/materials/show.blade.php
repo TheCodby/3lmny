@@ -23,21 +23,15 @@
 			</div>
 			@endif
             <div class="col-md-4 mb-3 order-md-2">
-                <img src="{{asset('storage/uploads/materials/'.$material->image->path) ?? ''}}" class="img-fluid hoverimage" style='border-radius:30px;'>
+                <img src="{{asset('storage/uploads/materials/'.$material->image->path) ?? ''}}" class="img-fluid hoverimage" style='border-radius:30px; max-height:300px'>
             </div>
             <div class="col-md-8 mb-3 order-md-1">
-                <div class="card shadow">
-                    <div class="card-body">
+                <div class="card shadow" style='height:100%;'>
+                    <div class="card-body d-flex flex-column">
                         <h2 class="card-title">{{$material->subject}} @auth <i class="far fa-bookmark" style='cursor: pointer; color:#dabd18b2' id='bookmark'></i> @endauth</h2>
-                        @php
-                            @$keywords = explode(",", $material->keywords)
-                        @endphp
-                        @foreach ($keywords as $keyword)
-                            <p class="badge rounded-pill bg-primary mb-0 fs-6">{{$keyword}}</p>
-                        @endforeach
                         <p class='mt-2'>{{$material->description}}</p>
                         @auth
-                        <div class='d-flex justify-content-between'>
+                        <div class='d-flex justify-content-between mt-auto'>
                             <div class="rating" style='align-self: center;'>
                                 <i class="rating__star far fa-star"></i>
                                 <i class="rating__star far fa-star"></i>
@@ -53,6 +47,15 @@
             </div>
         </div>
         <div class="row mb-3">
+            <div class="col-md-8 mb-3">
+                <h3>Keywords</h3>
+                @php
+                    @$keywords = explode(",", $material->keywords)
+                @endphp
+                @foreach ($keywords as $keyword)
+                    <p class="d-inline-flex badge rounded-pill bg-primary mb-0 fs-6">{{$keyword}}</p>
+                @endforeach
+            </div>
             <div class="col-md-8">
                 @if(!$comments->isEmpty())
                     <h3>Comments</h3>

@@ -37,6 +37,34 @@ class AdminController extends Controller
         }
 		return view('admin.materials.materialTable', ['materials' => $materials]);
     }
+	public function filterMaterials(Request $request)
+    {
+        if($request->ajax())
+        {
+            $subject = $request->input('subject');
+            $type = $request->input('type');
+            $level = $request->input('level');
+            $keywords = $request->input('keywords');
+            $materials = Material::where('subject', 'LIKE', '%'.$subject.'%')
+                ->where('keywords', 'LIKE', '%'.$keywords.'%');
+            if($level != 'all'){
+                $materials->where('level', '=', $level);
+            };
+            if($type != 'all'){
+                $materials->where('type', '=', $type);
+            };
+            $materials = $materials->orderBy('id', 'DESC')->paginate(15, ['*'], 'MaterialsPage')->withQueryString();
+            foreach($materials as $material)
+            {
+                $material['updated'] = Carbon::parse($material->updated_at)->diffForHumans();
+            }
+            if ( $request->page > ($materials->lastPage()) )
+            {
+                abort(404);
+            }
+            return view('admin.materials.materialTable', ['materials' => $materials , 'search' => true]);
+        }
+    }
 	public function AddMaterial(Request $request)
 	{
 		$validator = Validator::make($request->all(), [

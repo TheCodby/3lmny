@@ -7,6 +7,7 @@
 				<th scope="col">Keywords</th>
 				<th scope="col">Created At</th>
 				<th scope="col">Updated At</th>
+				<th scope="col">Show</th>
 				<th scope="col">Edit</th>
 				<th scope="col">Delete</th>
 			</tr>
@@ -26,6 +27,7 @@
 					</td>
 					<td>{{$material->created_at}}</td>
 					<td>{{$material->updated_at}}</td>
+					<td><a href='{{route("materials.show", $material->id)}}' class='btn btn-outline-primary'>Show</a></td>
 					<td><a href='{{route("admin.materials.edit", $material->id)}}' class='btn btn-outline-success'>Edit</a></td>
 					<td><a href='{{route("admin.materials.delete", $material->id)}}' class='btn btn-outline-danger'>Delete</a></td>
 				</tr>
@@ -34,3 +36,10 @@
 	</table>
 	{{ $materials->links() }}
 </div>
+<script>
+    @if(isset($search))
+        var isSearch = true
+    @else
+        var isSearch = false
+    @endif
+</script>
