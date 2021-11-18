@@ -69,39 +69,29 @@
 @include('admin.materials.add')
 @include('admin.materials.types')
 @include('admin.materials.levels')
-<div class="table-scrollable">
-	<table class="table table-striped table-hover">
-		<thead>
-			<tr>
-				<th scope="col">#</th>
-				<th scope="col">Subject</th>
-				<th scope="col">Keywords</th>
-				<th scope="col">Created At</th>
-				<th scope="col">Updated At</th>
-				<th scope="col">Edit</th>
-				<th scope="col">Delete</th>
-			</tr>
-		</thead>
-		<tbody>
-			@foreach ($materials as $material)
-				<tr>
-					<th scope="row">{{$material->id}}</th>
-					<td>{{$material->subject}}</td>
-					@php
-						@$keywords = explode(",", $material->keywords)
-					@endphp
-					<td>
-					@foreach ($keywords as $keyword)
-						<span class="badge rounded-pill bg-primary">{{$keyword}}</span>
-					@endforeach
-					</td>
-					<td>{{$material->created_at}}</td>
-					<td>{{$material->updated_at}}</td>
-					<td><a href='{{route("admin.materials.edit", $material->id)}}' class='btn btn-outline-success'>Edit</a></td>
-					<td><a href='{{route("admin.materials.delete", $material->id)}}' class='btn btn-outline-danger'>Delete</a></td>
-				</tr>
-			@endforeach
-		</tbody>
-	</table>
-	{{ $materials->links() }}
+<div id="materialsData">
+	{!! $materials !!}
 </div>
+
+<!-- Fetch data from another page -->
+<script>
+	$(document).ready(function(){
+		// Ajax for pages
+		$(document).on('click', '.page-link', function(event){
+			event.preventDefault();
+			var page = $(this).attr('href').split('MaterialsPage=')[1];
+			fetch_page(page);
+		})
+		function fetch_page(page)
+		{
+			$("#materialsData").html('<div class="d-flex justify-content-center"> <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status"> <span class="visually-hidden">Loading...</span> </div> </div>');
+			$.ajax({
+				url:"Admin/Materials/fetch?MaterialsPage="+page,
+				success:function(data)
+				{
+					$('#materialsData').html(data);
+				}
+			})
+		}
+	})
+</script>

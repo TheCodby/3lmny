@@ -21,8 +21,11 @@ class AdminController extends Controller
      */
     public function __invoke(Request $request)
     {
-        //
-		$materials = Material::paginate(15, ['*'], 'MaterialsPage');
+		return view('admin.home', ['materials' => $this->getMaterialsByPage($request), 'types' => MaterialsTypes::all(), 'levels' => Level::all()]);
+    }
+	public function getMaterialsByPage(Request $request)
+    {
+        $materials = Material::paginate(15, ['*'], 'MaterialsPage');
         foreach($materials as $material)
         {
             $material['updated'] = Carbon::parse($material->updated_at)->diffForHumans();
@@ -32,7 +35,7 @@ class AdminController extends Controller
         {
             abort(404);
         }
-		return view('admin.home', ['materials' => $materials, 'types' => MaterialsTypes::all(), 'levels' => Level::all()]);
+		return view('admin.materials.materialTable', ['materials' => $materials]);
     }
 	public function AddMaterial(Request $request)
 	{

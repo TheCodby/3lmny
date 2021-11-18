@@ -24,17 +24,52 @@ class MaterialsController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $materials = Material::with('typeRow')->with('levelRow')->with('image')->orderBy('id', 'DESC')->paginate(15);
-        foreach($materials as $material)
+		return view('materials.home', ['types' => MaterialsTypes::all(), 'levels' => Level::all()]);
+    }
+    public function getMaterialsByPage(Request $request)
+    {
+        if($request->ajax())
         {
-            $material['updated'] = Carbon::parse($material->updated_at)->diffForHumans();
+            $materials = Material::with('typeRow')->with('levelRow')->with('image')->orderBy('id', 'DESC')->paginate(15);
+            foreach($materials as $material)
+            {
+                $material['updated'] = Carbon::parse($material->updated_at)->diffForHumans();
+            }
+            //limit pages
+            if ( $request->page > ($materials->lastPage()) )
+            {
+                abort(404);
+            }
+            return view('materials.materialsList', ['materials' => $materials]);
         }
-        //limit pages
-        if ( $request->page > ($materials->lastPage()) )
+    }
+    public function filterMaterials(Request $request)
+    {
+        if($request->ajax())
         {
-            abort(404);
+            $subject = $request->input('subject');
+            $type = $request->input('type');
+            $level = $request->input('level');
+            $keywords = $request->input('keywords');
+            $materials = Material::where('subject', 'LIKE', '%'.$subject.'%')
+                ->where('keywords', 'LIKE', '%'.$keywords.'%');
+            if($level != 'all'){
+                $materials->where('level', '=', $level);
+            };
+            if($type != 'all'){
+                $materials->where('type', '=', $type);
+            };
+            $materials = $materials->orderBy('id', 'DESC')->paginate(15, ['*'], 'page')->withQueryString();
+            foreach($materials as $material)
+            {
+                $material['updated'] = Carbon::parse($material->updated_at)->diffForHumans();
+            }
+            if ( $request->page > ($materials->lastPage()) )
+            {
+                abort(404);
+            }
+            return view('materials.materialsList', ['materials' => $materials , 'search' => true]);
         }
-		return view('materials.home', ['materials' => $materials, 'types' => MaterialsTypes::all(), 'levels' => Level::all()]);
     }
     public function showMaterial(String $id)
     {
@@ -96,27 +131,6 @@ class MaterialsController extends Controller
 			return redirect()
                 ->route('materials.show', $id);
 		}
-    }
-    public function filterMaterials(Request $request)
-    {
-        $subject = $request->input('subject');
-        $type = $request->input('type');
-        $level = $request->input('level');
-        $keywords = $request->input('keywords');
-        $materials = Material::where('subject', 'LIKE', '%'.$subject.'%')
-            ->where('keywords', 'LIKE', '%'.$keywords.'%');
-        if($level != 'all'){
-            $materials->where('level', '=', $level);
-        };
-        if($type != 'all'){
-            $materials->where('type', '=', $type);
-        };
-        $materials = $materials->orderBy('id', 'DESC')->paginate(15);
-        foreach($materials as $material)
-        {
-            $material['updated'] = Carbon::parse($material->updated_at)->diffForHumans();
-        }
-        return view('materials.home', ['materials' => $materials, 'types' => MaterialsTypes::all(), 'levels' => Level::all()]);
     }
     public function rateMaterial(String $id, Request $request)
     {

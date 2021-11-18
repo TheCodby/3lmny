@@ -69,40 +69,29 @@
 <?php echo $__env->make('admin.materials.add', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php echo $__env->make('admin.materials.types', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php echo $__env->make('admin.materials.levels', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-<div class="table-scrollable">
-	<table class="table table-striped table-hover">
-		<thead>
-			<tr>
-				<th scope="col">#</th>
-				<th scope="col">Subject</th>
-				<th scope="col">Keywords</th>
-				<th scope="col">Created At</th>
-				<th scope="col">Updated At</th>
-				<th scope="col">Edit</th>
-				<th scope="col">Delete</th>
-			</tr>
-		</thead>
-		<tbody>
-			<?php $__currentLoopData = $materials; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $material): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-				<tr>
-					<th scope="row"><?php echo e($material->id); ?></th>
-					<td><?php echo e($material->subject); ?></td>
-					<?php
-						@$keywords = explode(",", $material->keywords)
-					?>
-					<td>
-					<?php $__currentLoopData = $keywords; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $keyword): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-						<span class="badge rounded-pill bg-primary"><?php echo e($keyword); ?></span>
-					<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-					</td>
-					<td><?php echo e($material->created_at); ?></td>
-					<td><?php echo e($material->updated_at); ?></td>
-					<td><a href='<?php echo e(route("admin.materials.edit", $material->id)); ?>' class='btn btn-outline-success'>Edit</a></td>
-					<td><a href='<?php echo e(route("admin.materials.delete", $material->id)); ?>' class='btn btn-outline-danger'>Delete</a></td>
-				</tr>
-			<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-		</tbody>
-	</table>
-	<?php echo e($materials->links()); ?>
+<div id="materialsData">
+	<?php echo $materials; ?>
 
-</div><?php /**PATH C:\3lmny\resources\views/admin/materials.blade.php ENDPATH**/ ?>
+</div>
+
+<!-- Fetch data from another page -->
+<script>
+	$(document).ready(function(){
+		$(document).on('click', '.page-link', function(event){
+			event.preventDefault();
+			var page = $(this).attr('href').split('MaterialsPage=')[1];
+			fetch_page(page);
+		})
+		function fetch_page(page)
+		{
+			$("#materialsData").html('<div class="spinner-border" role="status"> <span class="visually-hidden">Loading...</span> </div>');
+			$.ajax({
+				url:"Admin/Materials/fetch?MaterialsPage="+page,
+				success:function(data)
+				{
+					$('#materialsData').html(data);
+				}
+			})
+		}
+	})
+</script><?php /**PATH C:\3lmny\resources\views/admin/materials.blade.php ENDPATH**/ ?>

@@ -53,7 +53,8 @@ Route::middleware(['auth'])->group(function () {
 });
 Route::prefix('Materials')->group(function () {
 	Route::get('/', MaterialsController::class)->name('materials');
-	Route::get('/Filter', [MaterialsController::class, 'filterMaterials'])->name('materials.filter');
+	Route::get('/Fetch', [MaterialsController::class, 'getMaterialsByPage']);
+	Route::get('/Filter', [MaterialsController::class, 'filterMaterials']);
 	Route::get('/{id}', [MaterialsController::class, 'showMaterial'])->name('materials.show');
 	Route::middleware(['auth'])->group(function () {
 		Route::post('/{id}/Bookmark', [MaterialsController::class, 'bookmarkMaterial'])->name('materials.bookmark');

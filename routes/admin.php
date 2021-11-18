@@ -22,6 +22,7 @@ Route::prefix('Materials')->group(function () {
     Route::get('Edit/{id}', [AdminController::class, 'showEditMaterial'])->name('admin.materials.edit');
     Route::post('Edit/{id}', [AdminController::class, 'EditMaterial'])->name('admin.materials.edit');
     Route::get('Delete/{id}', [AdminController::class, 'DeleteMaterial'])->name('admin.materials.delete');
+    Route::get('/fetch', [AdminController::class, 'getMaterialsByPage']);
 });
 Route::prefix('Types')->group(function () {
     Route::post('Add', [AdminController::class, 'AddType'])->name('admin.types.add');
