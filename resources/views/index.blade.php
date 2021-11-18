@@ -87,7 +87,7 @@
 				<div class="card text-white text-center p-2 border-dark mb-3 mt-5 border-0" style='background-color:#2F334C'>
 					<i class='align-self-center' data-feather="book-open" stroke-width='2' width='72px' height='72px'></i>
 					<div class="card-body">
-						<h5 class="card-title">20 Materials</h5>
+						<h5 class="card-title">{{$MaterialsCount}} Materials</h5>
 					</div>
 				</div>
 			</div>
@@ -95,7 +95,7 @@
 				<div class="card text-white text-center p-2 border-dark mb-3 mt-5 border-0" style='background-color:#2F334C'>
 					<i class='align-self-center' data-feather="users" stroke-width='2' width='72px' height='72px'></i>
 					<div class="card-body">
-						<h5 class="card-title">2 Users</h5>
+						<h5 class="card-title">{{$UsersCount}} Users</h5>
 					</div>
 				</div>
 			</div>
@@ -103,7 +103,7 @@
 				<div class="card text-white text-center p-2 border-dark mb-3 mt-5 border-0" style='background-color:#2F334C'>
 				<i class='align-self-center' data-feather="eye" stroke-width='2' width='72px' height='72px'></i>
 					<div class="card-body">
-						<h5 class="card-title">10 Visitors</h5>
+						<h5 class="card-title">{{$VisitorsCount}} Visitors</h5>
 					</div>
 				</div>
 			</div>
