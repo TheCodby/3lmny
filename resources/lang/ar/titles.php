@@ -23,4 +23,5 @@ return [
     'materials' => 'المواد',
     'editprofile' => 'تعديل ملفك الشخصي',
     'bookmarks' => 'المفضلة',
+    'donate' => 'تبرع',
 ];

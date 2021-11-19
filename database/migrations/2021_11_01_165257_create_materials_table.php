@@ -17,7 +17,7 @@ class CreateMaterialsTable extends Migration
             $table->id();
             $table->text('subject');
             $table->longText('description');
-            $table->url('url');
+            $table->text('url');
             $table->integer('type');
 			$table->integer('level'); 
 			$table->text('keywords')->nullable();

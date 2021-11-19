@@ -40,7 +40,7 @@
 									<li class="nav-item ms-2 mt-2 mt-md-0 fs-6"><a type="button" class="btn btn-primary fw-bold" href="<?php echo e(route('register')); ?>"><i data-feather="user-plus" stroke-width='2' width='22px' height='22px'></i> <?php echo e(__('buttons.joinnow')); ?></a></li>
 								<?php endif; ?>
 							<?php if(auth()->guard()->check()): ?>
-								<li class="nav-item ms-2 mt-2 mt-md-0 fs-6"><a type="button" href="#" class="navbar-btn menu-item button3 btn btn-link text-capitalize"> <?php echo e(__('buttons.donate')); ?></a></li>
+								<li class="nav-item ms-2 mt-2 mt-md-0 fs-6"><a type="button" href="<?php echo e(route('donate')); ?>" class="navbar-btn menu-item button3 btn btn-link text-capitalize"> <?php echo e(__('buttons.donate')); ?></a></li>
 								<li class='nav-item ms-2 mt-2 mt-md-0 fs-6'><div class="dropdown">
 								<a class="button3 btn btn-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
 									<i data-feather="user"></i> <?php echo e(Auth::user()->username); ?>
@@ -48,7 +48,7 @@
 								</a>
 								<ul class="dropdown-menu dropdown-menu-end" style="position:absolute;" aria-labelledby="dropdownMenuLink">
 									<li><a class="dropdown-item" href="<?php echo e(route('myprofile')); ?>">Profile</a></li>
-									<li><a class="dropdown-item" href="#">Settings</a></li>
+									<li><a class="dropdown-item disabled" href="#">Settings <p class="badge rounded-pill bg-danger mb-0">Soon!</p></a></li>
 									<li><a class="dropdown-item" href="<?php echo e(route('materials.bookmarks')); ?>">Bookmarks</a></li>
 									<?php if(Auth::user()->user_type == '2'): ?>
 									<li><a class="dropdown-item" href="<?php echo e(route('admin')); ?>">Admin Panel</a></li>

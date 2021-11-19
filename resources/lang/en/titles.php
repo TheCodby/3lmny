@@ -23,4 +23,5 @@ return [
     'materials' => 'Materials',
     'editprofile' => 'Edit your profile',
     'bookmarks' => 'Bookmarks',
+    'donate' => 'Donate',
 ];

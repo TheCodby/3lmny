@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\MaterialsController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DonationController;
 use App\Models\Visitor;
 use App\Models\User;
 use App\Models\Material;
@@ -24,6 +25,7 @@ use App\Models\Material;
 Route::get('/', function () {
     return view('index', ['VisitorsCount' => Visitor::all()->count(), 'UsersCount' => User::all()->count(), 'MaterialsCount' => Material::all()->count()]);
 })->name('index');
+Route::get('Donate', DonationController::class)->name('donate');
 Route::get('/SetLangauage/{locale}', function ($locale) {
 	if (isset($locale) && array_key_exists($locale, config('app.locales'))) {
 		session()->put('locale', $locale);
