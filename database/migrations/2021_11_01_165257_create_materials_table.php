@@ -22,6 +22,7 @@ class CreateMaterialsTable extends Migration
 			$table->integer('level'); 
 			$table->text('keywords')->nullable();
             $table->integer('rate')->default(0); 
+            $table->integer('image_id'); 
             $table->timestamps();
         });
     }

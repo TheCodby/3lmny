@@ -43,9 +43,12 @@
                                     <div class="form-group">
                                     <label for="level" class="form-label">Your Level</label>
                                         <select class="form-select" id="level" name='level' aria-label="">
-                                            <option value="{{$user->levelRow->id}}" selected>{{$user->levelRow->name}}</option>
+                                            <option value="{{$user->levelRow->id ?? 'None'}}" selected>{{$user->levelRow->name ?? 'None'}}</option>
+                                            @php
+                                                $userLevel = $user->levelRow->id ?? 0;
+                                            @endphp
                                             @foreach ($levels as $level)
-                                                @if($level->id != $user->levelRow->id)
+                                                @if($level->id != $userLevel)
                                                     <option value="{{$level->id}}">{{$level->name}}</option>
                                                 @endif
                                             @endforeach

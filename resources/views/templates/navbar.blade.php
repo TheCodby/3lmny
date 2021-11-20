@@ -32,7 +32,7 @@
 						@guest
 							<li class="nav-item ms-1 mt-1 mt-md-0"><a type="button" class="btn btn-primary navbar-btn menu-item text-capitalize" href="{{ route('login') }}"><i data-feather="user" stroke-width='2' width='20px' height='20px'></i> {{ __('buttons.login') }}</a></li>
 						@endguest
-						<li class="nav-item ms-1 mt-1 mt-md-0"><a type="button" href="{{route('donate')}}" class="btn btn-gold navbar-btn menu-item text-capitalize"><i data-feather="dollar-sign" stroke-width='2' width='20px' height='20px'></i> {{ __('buttons.donate') }}</a></li>
+						<li class="nav-item ms-1 mt-1 mt-md-0"><a type="button" href="{{route('donation')}}" class="btn btn-gold navbar-btn menu-item text-capitalize"><i data-feather="dollar-sign" stroke-width='2' width='20px' height='20px'></i> {{ __('buttons.donate') }}</a></li>
 					@auth
 						<li class='nav-item ms-1 mt-1 mt-md-0'><div class="dropdown">
 						<a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
