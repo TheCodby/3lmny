@@ -26,11 +26,7 @@ Route::get('/', function () {
     return view('index', ['VisitorsCount' => Visitor::all()->count(), 'UsersCount' => User::all()->count(), 'MaterialsCount' => Material::all()->count()]);
 })->name('index');
 Route::prefix('Donation')->group(function () {
-	Route::get('', DonationController::class)->name('donation');
-	Route::get('success', [DonationController::class, 'success'])->name('donation.success');
-	Route::get('cancelled', [DonationController::class, 'cancelled'])->name('donation.cancelled');
-	Route::get('notify', [DonationController::class, 'notify'])->name('donation.notify');
-	
+	Route::get('', DonationController::class)->name('donation');	
 });
 Route::get('/SetLangauage/{locale}', function ($locale) {
 	if (isset($locale) && array_key_exists($locale, config('app.locales'))) {

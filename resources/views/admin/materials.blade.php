@@ -58,7 +58,7 @@
 <!-- Fetch data from another page -->
 <script>
 	$(document).ready(function(){
-		$('#keywords').tagsInput();
+		$('#keywordsSearch').tagsInput();
 		$.ajax({
 			url:"/Admin/Materials/FetchMaterials?MaterialsPage=1",
 			success:function(data)

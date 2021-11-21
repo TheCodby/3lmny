@@ -52,7 +52,7 @@ class MaterialsController extends Controller
             $level = $request->input('level');
             $keywords = $request->input('keywords');
             $materials = Material::where('subject', 'LIKE', '%'.$subject.'%')
-                ->where('keywords', 'LIKE', '%'.$keywords.'%');
+            ->where('keywords', 'LIKE', '%'.$keywords.'%');
             if($level != 'all'){
                 $materials->where('level', '=', $level);
             };
