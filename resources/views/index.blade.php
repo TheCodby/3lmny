@@ -121,25 +121,25 @@
 				<div class='col-md-6 d-flex justify-content-center'>
 					<img id='books' src="{{asset('images/css/png/contactus.png')}}" style='max-width:100vw;'> </object>
 				</div>
-				<div class='col-md-4'>
+				<div class='col-md-4' id='contactinputs'>
 					<div class="form-floating mb-3 text-light">
-						<input type="text" name='name' style='background-color:#151722;' class="form-control custominput text-light" id="floatingInput">
+						<input type="text" name='name' id='name' style='background-color:#151722;' class="form-control custominput text-light" id="floatingInput">
 						<label for="floatingInput">Your Name</label>
 					</div>
 					<div class="form-floating mb-3 text-light">
-						<input type="email" name='email' style='background-color:#151722;' class="form-control custominput text-light" id="floatingInput">
+						<input type="email" name='email' id='email' style='background-color:#151722;' class="form-control custominput text-light" id="floatingInput">
 						<label for="floatingInput">Email</label>
 					</div>
 					<div class="form-floating mb-3 text-light">
-						<input type="text" name='subject' style='background-color:#151722;' class="form-control custominput text-light" id="floatingInput">
+						<input type="text" name='subject' id='subject' style='background-color:#151722;' class="form-control custominput text-light" id="floatingInput">
 						<label for="floatingInput">Subject</label>
 					</div>
 					<div class="form-floating text-light">
-						<textarea style='background-color:#151722;' name='message' class="form-control custominput text-light h-50" id="floatingTextarea2" style="height: 100px"></textarea>
+						<textarea style='background-color:#151722;' id='message' name='message' class="form-control custominput text-light h-50" id="floatingTextarea2" style="height: 100px"></textarea>
 						<label for="floatingTextarea2">Message</label>
 					</div>
 					<div class="d-flex justify-content-center">
-						<button type="button" class="btn btn-success mt-2 align-self-center">Submit</button>
+						<button type="button" id='sendMessage' class="btn btn-success mt-2 align-self-center">Submit</button>
 					</div>
 				</div>
 			</div>
@@ -170,6 +170,36 @@
 				}
 			}
 			typingEffect('typing', txt)
+			// Contact us code
+			$(document).on('click', '#sendMessage', function(event){
+				event.preventDefault();
+				var name = $('#name').val();
+				var email = $('#email').val();
+				var subject = $('#subject').val();
+				var message = $('#message').val();
+				$(this).html(`
+					<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+  					<span class="visually-hidden">Loading...</span>
+				`);
+				$(this).prop('disabled', true);
+				$.ajax({
+					type : 'POST',
+					url : "{{route('contact.send')}}",
+					data : {'name': name, 'email': email, 'subject': subject, 'message': message},
+					success:function(response)
+					{
+						console.log(response);
+						$('#contactinputs').html(`
+							<h3 class='text-center'><i class="fas fa-check-circle" style='font-size: 144px;color:#008000;'></i></h3></br>
+							<h3 class='card-title text-center text-light'>${response.message}</h3>
+							`);
+					},
+					error: function(error)
+					{
+						$(this).prop('disabled', false);
+					}
+				})
+			});
 		});
 	</script>
 @include('templates.footer')

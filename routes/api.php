@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DonationController;
+use App\Http\Controllers\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +23,4 @@ Route::group(['prefix'=>'Donation'], function(){
     Route::post('Create',[DonationController::class,'create'])->name('donation.create');
     Route::post('Capture',[DonationController::class,'capture'])->name('donation.capture');
 });
+Route::post('Contact',[ContactController::class,'send'])->name('contact.send');
