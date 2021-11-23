@@ -152,3 +152,11 @@ textarea {
   cursor: pointer;
   color: #dabd18b2;
 }
+.fade {
+  -webkit-transition: all .2s linear;
+  -o-transition: all .2s linear;
+  transition: all .2s linear;
+}
+.modal-dialog {
+  opacity: 1;
+}

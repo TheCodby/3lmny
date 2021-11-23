@@ -110,10 +110,6 @@
             request = $.ajax({
                 url: "{{route('materials.bookmark', $material->id)}}",
                 type: "post",
-                success: function(response)
-                {
-                    console.log(response);
-                }
             })
         });
         //

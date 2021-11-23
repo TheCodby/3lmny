@@ -20,6 +20,8 @@ class CreateContactsTable extends Migration
             $table->text('subject');
             $table->longtext('message');
             $table->ipAddress('ip');
+            // 1: read || 0: unread
+            $table->integer('admin_read')->default(0);
             $table->timestamps();
         });
     }

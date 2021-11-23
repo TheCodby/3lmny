@@ -31,25 +31,25 @@
 					<button class="nav-link" id="materials-tab" data-bs-toggle="tab" data-bs-target="#materials" type="button" role="tab" aria-controls="materials" aria-selected="true"><i class="fas fa-book"></i> Materials <span class="badge bg-primary rounded-pill">1</span></button>
 				  </li>
 				  <li class="nav-item" role="presentation">
-					<button class="nav-link" id="users-tab" data-bs-toggle="tab" data-bs-target="#users" type="button" role="tab" aria-controls="users" aria-selected="true"><i class="fas fa-users"></i> Users <span class="badge bg-primary rounded-pill">1</span></button>
+					<button class="nav-link" id="users-tab" data-bs-toggle="tab" data-bs-target="#users" type="button" role="tab" aria-controls="users" aria-selected="true"><i class="fas fa-users"></i> Users <?php if($users->count() > 0): ?><span class="badge bg-primary rounded-pill"><?php echo e($users->count()); ?></span><?php endif; ?></button>
 				  </li>
 				  <li class="nav-item" role="presentation">
-					<button class="nav-link" id="suggestions-tab" data-bs-toggle="tab" data-bs-target="#suggestions" type="button" role="tab" aria-controls="suggestions" aria-selected="true"><i class="fas fa-brain"></i> Suggestions <span class="badge bg-primary rounded-pill">1</span></button>
+					<button class="nav-link" id="contacts-tab" data-bs-toggle="tab" data-bs-target="#contacts" type="button" role="tab" aria-controls="contacts" aria-selected="true"><i class="fas fa-brain"></i> Contacts <?php if($notifications['contacts'] > 0): ?><span class="badge bg-primary rounded-pill"><?php echo e($notifications['contacts']); ?></span><?php endif; ?></button>
 				  </li>
 				</ul>
 				<div class='card-body'>
 					<div class="tab-content" id="tabContent">
-						<div class="tab-pane fade show active" id="analysis" role="tabpanel" aria-labelledby="analysis-tab">
+						<div class="tab-pane show active" id="analysis" role="tabpanel" aria-labelledby="analysis-tab">
 							
 						</div>
-						<div class="tab-pane fade" id="materials" role="tabpanel" aria-labelledby="materials-tab">
+						<div class="tab-pane" id="materials" role="tabpanel" aria-labelledby="materials-tab">
 							<?php echo $__env->make('admin.materials', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 						</div>
-						<div class="tab-pane fade" id="users" role="tabpanel" aria-labelledby="users-tab">
-							
+						<div class="tab-pane" id="users" role="tabpanel" aria-labelledby="users-tab">
+						<?php echo $__env->make('admin.users', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 						</div>
-						<div class="tab-pane fade" id="suggestions" role="tabpanel" aria-labelledby="suggestions-tab">
-							
+						<div class="tab-pane" id="contacts" role="tabpanel" aria-labelledby="contacts-tab">
+							<?php echo $__env->make('admin.contacts', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 						</div>
 					</div>
 				</div>

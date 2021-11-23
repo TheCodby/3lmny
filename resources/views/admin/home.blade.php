@@ -30,25 +30,25 @@
 					<button class="nav-link" id="materials-tab" data-bs-toggle="tab" data-bs-target="#materials" type="button" role="tab" aria-controls="materials" aria-selected="true"><i class="fas fa-book"></i> Materials <span class="badge bg-primary rounded-pill">1</span></button>
 				  </li>
 				  <li class="nav-item" role="presentation">
-					<button class="nav-link" id="users-tab" data-bs-toggle="tab" data-bs-target="#users" type="button" role="tab" aria-controls="users" aria-selected="true"><i class="fas fa-users"></i> Users <span class="badge bg-primary rounded-pill">1</span></button>
+					<button class="nav-link" id="users-tab" data-bs-toggle="tab" data-bs-target="#users" type="button" role="tab" aria-controls="users" aria-selected="true"><i class="fas fa-users"></i> Users @if($users->count() > 0)<span class="badge bg-primary rounded-pill">{{$users->count()}}</span>@endif</button>
 				  </li>
 				  <li class="nav-item" role="presentation">
-					<button class="nav-link" id="suggestions-tab" data-bs-toggle="tab" data-bs-target="#suggestions" type="button" role="tab" aria-controls="suggestions" aria-selected="true"><i class="fas fa-brain"></i> Suggestions <span class="badge bg-primary rounded-pill">1</span></button>
+					<button class="nav-link" id="contacts-tab" data-bs-toggle="tab" data-bs-target="#contacts" type="button" role="tab" aria-controls="contacts" aria-selected="true"><i class="fas fa-brain"></i> Contacts @if($notifications['contacts'] > 0)<span class="badge bg-primary rounded-pill">{{$notifications['contacts']}}</span>@endif</button>
 				  </li>
 				</ul>
 				<div class='card-body'>
 					<div class="tab-content" id="tabContent">
-						<div class="tab-pane fade show active" id="analysis" role="tabpanel" aria-labelledby="analysis-tab">
+						<div class="tab-pane show active" id="analysis" role="tabpanel" aria-labelledby="analysis-tab">
 							
 						</div>
-						<div class="tab-pane fade" id="materials" role="tabpanel" aria-labelledby="materials-tab">
+						<div class="tab-pane" id="materials" role="tabpanel" aria-labelledby="materials-tab">
 							@include('admin.materials')
 						</div>
-						<div class="tab-pane fade" id="users" role="tabpanel" aria-labelledby="users-tab">
-							
+						<div class="tab-pane" id="users" role="tabpanel" aria-labelledby="users-tab">
+						@include('admin.users')
 						</div>
-						<div class="tab-pane fade" id="suggestions" role="tabpanel" aria-labelledby="suggestions-tab">
-							
+						<div class="tab-pane" id="contacts" role="tabpanel" aria-labelledby="contacts-tab">
+							@include('admin.contacts')
 						</div>
 					</div>
 				</div>

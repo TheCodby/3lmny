@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ContactController;
 
 
 /*
@@ -22,8 +23,17 @@ Route::prefix('Materials')->group(function () {
     Route::get('Edit/{id}', [AdminController::class, 'showEditMaterial'])->name('admin.materials.edit');
     Route::post('Edit/{id}', [AdminController::class, 'EditMaterial'])->name('admin.materials.edit');
     Route::get('Delete/{id}', [AdminController::class, 'DeleteMaterial'])->name('admin.materials.delete');
-    Route::get('/FetchMaterials', [AdminController::class, 'getMaterialsByPage']);
-	Route::get('/FilterMaterials', [AdminController::class, 'filterMaterials']);
+    Route::get('Fetch', [AdminController::class, 'getMaterialsPerPage']);
+	Route::get('Filter', [AdminController::class, 'filterMaterials']);
+});
+Route::prefix('Contacts')->group(function () {
+    Route::get('Fetch', [AdminController::class, 'getMessagesPerPage']);
+    Route::post('{id}/Read', [ContactController::class, 'read']);
+});
+Route::prefix('Users')->group(function () {
+    Route::get('Fetch', [AdminController::class, 'getUsersPerPage']);
+    Route::get('Filter', [AdminController::class, 'filterUser']);
+    Route::get('{id}', [AdminController::class, 'showUser']);
 });
 Route::prefix('Types')->group(function () {
     Route::post('Add', [AdminController::class, 'AddType'])->name('admin.types.add');

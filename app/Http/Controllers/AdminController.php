@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Validator;
+use DB;
 use App\Models\Material;
 use App\Models\MaterialsTypes;
 use App\Models\Level;
 use App\Models\File;
+use App\Models\User;
 use App\Discord\DiscordWebhook;
 use Carbon\Carbon;
 
@@ -21,11 +23,11 @@ class AdminController extends Controller
      */
     public function __invoke(Request $request)
     {
-		return view('admin.home', ['materials' => $this->getMaterialsByPage($request), 'types' => MaterialsTypes::all(), 'levels' => Level::all()]);
+		return view('admin.home', ['materials' => $this->getMaterialsPerPage($request), 'types' => MaterialsTypes::all(), 'levels' => Level::all(), 'users' => User::all(), 'contacts' => $this->getMessagesPerPage($request), 'notifications' => ['contacts' => DB::table('contacts')->where('admin_read', '=', '0')->count()]]);
     }
-	public function getMaterialsByPage(Request $request)
+	public function getMaterialsPerPage(Request $request)
     {
-        $materials = Material::paginate(15, ['*'], 'MaterialsPage');
+        $materials = Material::paginate(15, ['*'], 'Page');
         foreach($materials as $material)
         {
             $material['updated'] = Carbon::parse($material->updated_at)->diffForHumans();
@@ -53,7 +55,7 @@ class AdminController extends Controller
             if($type != 'all'){
                 $materials->where('type', '=', $type);
             };
-            $materials = $materials->orderBy('id', 'DESC')->paginate(15, ['*'], 'MaterialsPage')->withQueryString();
+            $materials = $materials->orderBy('id', 'DESC')->paginate(15, ['*'], 'Page')->withQueryString();
             foreach($materials as $material)
             {
                 $material['updated'] = Carbon::parse($material->updated_at)->diffForHumans();
@@ -64,6 +66,18 @@ class AdminController extends Controller
             }
             return view('admin.materials.materialTable', ['materials' => $materials , 'search' => true]);
         }
+    }
+	public function getMessagesPerPage(Request $request)
+    {
+        $contacts = DB::table('contacts')
+		->orderByRaw('admin_read = 1 ASC')
+		->paginate(15, ['*'], 'Page');
+        //limit pages
+        if ( $request->page > ($contacts->lastPage()) )
+        {
+            abort(404);
+        }
+		return view('admin.contacts.contactsList', ['contacts' => $contacts]);
     }
 	public function AddMaterial(Request $request)
 	{
@@ -246,6 +260,35 @@ class AdminController extends Controller
             return redirect()
 				->route('admin.materials.edit', $id)
 				->withInput();
+        }
+	}
+	public function getUsersPerPage(Request $request)
+	{
+		$users = User::paginate(15, ['*'], 'Page');
+        //limit pages
+        if ( $request->page > ($users->lastPage()) )
+        {
+            abort(404);
+        }
+		return view('admin.users.usersList', ['users' => $users]);
+	}
+	public function filterUser(Request $request)
+	{
+		if($request->ajax())
+        {
+            $value = $request->input('value');
+            $method = $request->input('method');
+			if($method != 'username' && $method != 'email')
+			{
+				abort(400);
+			}
+            $users = User::where($method, 'LIKE', '%'.$value.'%');
+            $users = $users->orderBy('id', 'DESC')->paginate(15, ['*'], 'Page')->withQueryString();
+            if ( $request->page > ($users->lastPage()) )
+            {
+                abort(404);
+            }
+            return view('admin.users.usersList', ['users' => $users , 'search' => true]);
         }
 	}
 }

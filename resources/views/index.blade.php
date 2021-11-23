@@ -188,11 +188,21 @@
 					data : {'name': name, 'email': email, 'subject': subject, 'message': message},
 					success:function(response)
 					{
-						console.log(response);
-						$('#contactinputs').html(`
-							<h3 class='text-center'><i class="fas fa-check-circle" style='font-size: 144px;color:#008000;'></i></h3></br>
-							<h3 class='card-title text-center text-light'>${response.message}</h3>
+						$( "#contactinputs" ).animate({
+						opacity: 0,
+						padding: 1,
+						}, 2000, function() {
+							$('#contactinputs').html(`
+								<h3 class='text-center'><i class="fas fa-check-circle" style='font-size: 144px;color:#008000;'></i></h3></br>
+								<h3 class='card-title text-center text-light'>${response.message}</h3>
 							`);
+							$( "#contactinputs" ).animate({
+							opacity: 1,
+							padding: 0,
+							}, 2000, function() {
+								// Animation complete.
+							});
+						});
 					},
 					error: function(error)
 					{

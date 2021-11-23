@@ -54,9 +54,9 @@
 			//Load first items
 			$.ajax({
 				url:"/Materials/Fetch?page=1",
-				success:function(data)
+				success:function(response)
 				{
-					$('#materialsData').html(data);
+					replaceData(response);
 				}
 			})
 			// Ajax for pages
@@ -78,9 +78,9 @@
 				$("#materialsData").html('<div class="d-flex justify-content-center"> <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status"> <span class="visually-hidden">Loading...</span> </div> </div>');
 				$.ajax({
 					url:url,
-					success:function(data)
+					success:function(response)
 					{
-						$('#materialsData').html(data);
+						replaceData(response);
 					}
 				})
 			}
@@ -102,9 +102,19 @@
 					url:"/Materials/Filter"+data,
 					success:function(response)
 					{
-						$('#materialsData').html(response);
+						replaceData(response);
 					}
 				})
+			}
+			function replaceData(data)
+			{
+				$( "#materialsData" ).css("opacity", "0");
+				$('#materialsData').html(data);
+				$( "#materialsData" ).animate({
+					opacity: 1,
+				}, 1000, function() {
+					// Animation complete.
+				});
 			}
 		});
 	</script>

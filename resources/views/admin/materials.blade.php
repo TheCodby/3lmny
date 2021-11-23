@@ -5,42 +5,38 @@
 				<h3>Filters</h3>
 			</div>
 				<div class='card-body'>
-					<form method='POST' action='{{route("admin.materials.search")}}'>
-						@csrf
-						<div class='form-group row'>
-							<div class="col-8">
-								<label for="basic-url" class="form-label">Subject</label>
-								<input type="text" id='subjectSearch' class="form-control">
-							</div>
-							<div class="col-4">
-								<label for="basic-url" class="form-label">Type</label>
-								<select class="form-select" id='typeSearch' aria-label="All">
-								  <option value='all' selected>All</option>
-								  @foreach($types as $type)
-									<option value="{{$type->id}}">{{$type->name}}</option>
+					<div class='form-group row'>
+						<div class="col-8">
+							<label for="basic-url" class="form-label">Subject</label>
+							<input type="text" id='subjectSearch' class="form-control">
+						</div>
+						<div class="col-4">
+							<label for="basic-url" class="form-label">Type</label>
+							<select class="form-select" id='typeSearch' aria-label="All">
+								<option value='all' selected>All</option>
+								@foreach($types as $type)
+								<option value="{{$type->id}}">{{$type->name}}</option>
+							@endforeach
+							</select>
+						</div>
+					</div>
+					<div class='form-group row'>
+						<div class="col-6">
+							<label for="basic-url" class="form-label">Level</label>
+							<select class="form-select" id='levelSearch' aria-label="All">
+								<option value='all' selected>All</option>
+								@foreach($levels as $level)
+									<option value="{{$level->id}}">{{$level->name}}</option>
 								@endforeach
-								</select>
-							</div>
+							</select>
 						</div>
-						<div class='form-group row'>
-							<div class="col-6">
-								<label for="basic-url" class="form-label">Level</label>
-								<select class="form-select" id='levelSearch' aria-label="All">
-								  	<option value='all' selected>All</option>
-									@foreach($levels as $level)
-										<option value="{{$level->id}}">{{$level->name}}</option>
-									@endforeach
-								</select>
-							</div>
-							<div class="col-6">
-								<label for="basic-url" class="form-label">Keywords</label>
-								<input type="text" name='keywords' id="keywordsSearch" class="form-control">
-							</div>
+						<div class="col-6">
+							<label for="basic-url" class="form-label">Keywords</label>
+							<input type="text" name='keywords' id="keywordsSearch" class="form-control">
 						</div>
-						
+					</div>
 				</div>
 				<div class='card-footer d-flex justify-content-center'><button type='submit' id='searchMaterials' class="btn btn-primary"><i class="fas fa-search"></i> Search</button></div>
-			</form>
 		</div>
 	</div>
 </div>
@@ -54,13 +50,11 @@
 @include('admin.materials.types')
 @include('admin.materials.levels')
 <div id="materialsData"></div>
-
-<!-- Fetch data from another page -->
 <script>
 	$(document).ready(function(){
 		$('#keywordsSearch').tagsInput();
 		$.ajax({
-			url:"/Admin/Materials/FetchMaterials?MaterialsPage=1",
+			url:"/Admin/Materials/Fetch?Page=1",
 			success:function(data)
 			{
 				$('#materialsData').html(data);
@@ -69,14 +63,14 @@
 		// Ajax for pages
 		$(document).on('click', '.page-link', function(event){
 			event.preventDefault();
-			var page = $(this).attr('href').split('MaterialsPage=')[1];
-			var url = "/Admin/Materials/FetchMaterials?MaterialsPage="+page
+			var page = $(this).attr('href').split('Page=')[1];
+			var url = "/Admin/Materials/Fetch?Page="+page
 			if(isSearch){
 				var subject = $('#subjectSearch').val();
 				var type = $('#typeSearch').val();
 				var level = $('#levelSearch').val();
 				var keywords = $('#keywordsSearch').val();
-				url = "/Admin/Materials/FilterMaterials?subject="+subject+'&type='+type+'&level='+level+'&keywords='+keywords+'&MaterialsPage='+page;
+				url = "/Admin/Materials/Filter?subject="+subject+'&type='+type+'&level='+level+'&keywords='+keywords+'&Page='+page;
 			}
 			fetch_page(url);
 		})
@@ -106,7 +100,7 @@
 			$("#materialsData").html('<div class="d-flex justify-content-center"> <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status"> <span class="visually-hidden">Loading...</span> </div> </div>');
 			$.ajax({
 				type : 'GET',
-				url:"/Admin/Materials/FilterMaterials"+data,
+				url:"/Admin/Materials/Filter"+data,
 				success:function(response)
 				{
 					$('#materialsData').html(response);

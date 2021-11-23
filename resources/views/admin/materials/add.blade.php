@@ -62,7 +62,7 @@
 				<button type='submit' class="btn btn-primary mt-2">Add</button>
 			  </div>
 			</div>
-		  </div>					
+		</div>					
 	</form>
 </div>
 <script>
