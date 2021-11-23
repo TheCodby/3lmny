@@ -5,7 +5,23 @@
 @section('content')
 	<div class='container'>
 		<div class="row">
-			<div class='col-sm-4'>
+		@if(session()->has('message'))
+			<div class="alert alert-success d-flex align-items-center mb-3" role="alert">
+			  <div>
+				{{ session()->get('message') }}
+			  </div>
+			</div>
+			@endif
+			@if(!$errors->isEmpty())
+			<div class="alert alert-danger d-flex align-items-center mb-3" role="alert">
+			  <div>
+				@foreach ($errors->all() as $error)
+					<div>{{ $error }}</div>
+				@endforeach
+			  </div>
+			</div>
+			@endif
+			<div class='col-sm-4 justify-content-center'>
 				<div class="card shadow mb-3 sticky-top">
 					<div class='card-header'><h3 class="card-title"><i data-feather="search" stroke-width='2'></i> Filters</h3></div>
 					<div class="card-body ">
@@ -41,6 +57,10 @@
 						</div>
 						<button type='submit' id='search' class="btn btn-primary mt-2"><i class="fas fa-search"></i> Search</button>
 					</div>
+				</div>
+				<div class="d-flex justify-content-center mb-2">
+					<button type="submit" id="requestBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#requestMaterial">Request To Add Material</button>
+					@include('materials.request')
 				</div>
 			</div>
 			<div class="col-sm-8" id='materialsData'>

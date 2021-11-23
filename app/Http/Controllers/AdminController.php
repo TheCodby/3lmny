@@ -10,6 +10,7 @@ use App\Models\MaterialsTypes;
 use App\Models\Level;
 use App\Models\File;
 use App\Models\User;
+use App\Models\MaterialRequest;
 use App\Discord\DiscordWebhook;
 use Carbon\Carbon;
 
@@ -23,7 +24,7 @@ class AdminController extends Controller
      */
     public function __invoke(Request $request)
     {
-		return view('admin.home', ['materials' => $this->getMaterialsPerPage($request), 'types' => MaterialsTypes::all(), 'levels' => Level::all(), 'users' => User::all(), 'contacts' => $this->getMessagesPerPage($request), 'notifications' => ['contacts' => DB::table('contacts')->where('admin_read', '=', '0')->count()]]);
+		return view('admin.home', ['materials' => $this->getMaterialsPerPage($request), 'types' => MaterialsTypes::all(), 'levels' => Level::all(), 'users' => User::all(), 'contacts' => $this->getMessagesPerPage($request), 'notifications' => ['contacts' => DB::table('contacts')->where('admin_read', '=', '0')->count(), 'materials_requests' => MaterialRequest::all()->count()]]);
     }
 	public function getMaterialsPerPage(Request $request)
     {
@@ -106,7 +107,6 @@ class AdminController extends Controller
 		$data = request(['subject', 'description', 'url', 'type', 'level', 'keywords']);
 		$data['image_id'] = $file->id;
 		$material = Material::create($data);
-		$materials = Material::with('typeRow')->with('levelRow')->get()->where('id', '=', $material->id);
 		if($material)
 		{
 			$discordMsg = new DiscordWebhook();
@@ -290,5 +290,19 @@ class AdminController extends Controller
             }
             return view('admin.users.usersList', ['users' => $users , 'search' => true]);
         }
+	}
+	public function showRequests(Request $request)
+	{
+		$materials = MaterialRequest::paginate(15, ['*'], 'Page');
+        foreach($materials as $material)
+        {
+            $material['updated'] = Carbon::parse($material->updated_at)->diffForHumans();
+        }
+        //limit pages
+        if ( $request->page > ($materials->lastPage()) )
+        {
+            abort(404);
+        }
+		return view('admin.materials.materialTable', ['materials' => $materials]);
 	}
 }

@@ -44,13 +44,14 @@
 		<button type='button' class='btn btn-outline-Primary btn-md' data-bs-toggle="modal" data-bs-target="#addMaterial"><i class="fas fa-plus"></i> Add Material</button>
 		<button type='button' class='btn btn-outline-Primary btn-md ms-1' data-bs-toggle="modal" data-bs-target="#showTypes"><i class="fas fa-clipboard-list"></i> Show types</button>
 		<button type='button' class='btn btn-outline-Primary btn-md ms-1' data-bs-toggle="modal" data-bs-target="#showLevels"><i class="fas fa-user-graduate"></i> Show levels</button>
-		<a class='btn btn-outline-Primary btn-md ms-1'><i class="fas fa-paper-plane"></i> Show requests</a>
+		<button type='button' id='showRequests' class="btn btn-outline-Primary btn-md ms-1"><i class="fas fa-paper-plane"></i> Show requests</button>
 </div>
 <?php echo $__env->make('admin.materials.add', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php echo $__env->make('admin.materials.types', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php echo $__env->make('admin.materials.levels', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <div id="materialsData"></div>
 <script>
+	var showRequests = false;
 	$(document).ready(function(){
 		$('#keywordsSearch').tagsInput();
 		$.ajax({
@@ -107,5 +108,32 @@
 				}
 			})
 		}
+		$(document).on('click', '#showRequests', function(event){
+			event.preventDefault();
+			if(showRequests){
+				$("#materialsData").html('<div class="d-flex justify-content-center"> <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status"> <span class="visually-hidden">Loading...</span> </div> </div>');
+				$.ajax({
+					url:"/Admin/Materials/Fetch?Page=1",
+					success:function(data)
+					{
+						$('#materialsData').html(data);
+						$('#showRequests').html('<i class="fas fa-paper-plane"></i> Show Requests');
+						showRequests = false;
+					}
+				})
+			}else{
+				var url = "/Admin/Materials/Requests?Page=1"
+				$("#materialsData").html('<div class="d-flex justify-content-center"> <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status"> <span class="visually-hidden">Loading...</span> </div> </div>');
+				$.ajax({
+					url:url,
+					success:function(data)
+					{
+						$('#materialsData').html(data);
+						$('#showRequests').html('Hide Requests');
+						showRequests = true;
+					}
+				})
+			}
+		})
 	});
 </script><?php /**PATH C:\3lmny\resources\views/admin/materials.blade.php ENDPATH**/ ?>

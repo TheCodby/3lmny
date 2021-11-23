@@ -25,6 +25,7 @@ Route::prefix('Materials')->group(function () {
     Route::get('Delete/{id}', [AdminController::class, 'DeleteMaterial'])->name('admin.materials.delete');
     Route::get('Fetch', [AdminController::class, 'getMaterialsPerPage']);
 	Route::get('Filter', [AdminController::class, 'filterMaterials']);
+    Route::get('Requests', [AdminController::class, 'showRequests']);
 });
 Route::prefix('Contacts')->group(function () {
     Route::get('Fetch', [AdminController::class, 'getMessagesPerPage']);

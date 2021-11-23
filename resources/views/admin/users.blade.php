@@ -2,7 +2,7 @@
         <div class="col-md-4">
             <input type="text" name='user' id='value' placeholder='Username/Email' class="form-control">
         </div>
-        <label for="basic-url" class="form-label">Search Method</label>
+        <label for="basic-url" class="form-label">Choose Method</label>
         <div class="col-md-2">
             <select class="form-select" id='searchMethod' aria-label="All">
                 <option value='email' selected>Email</option>

@@ -9,6 +9,8 @@ use App\Models\Level;
 use App\Models\Comment;
 use App\Models\Rate;
 use App\Models\Bookmark;
+use App\Models\MaterialRequest;
+use App\Models\File;
 use Carbon\Carbon;
 use Auth;
 use Validator;
@@ -173,5 +175,40 @@ class MaterialsController extends Controller
             $material->updated = Carbon::parse($material->updated_at)->diffForHumans();
         }
         return view('materials.bookmarks', ['bookmarks' => $bookmarks]);
+    }
+    public function requestMaterial(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+			'subject' => 'required|string',
+			'description' => 'required|string',
+			'url' => 'required|url',
+			'type' => 'required|numeric',
+			'level' => 'required|numeric',
+			'keywords' => 'nullable|string',
+			'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+		]);
+		if($validator->fails())
+		{
+			return redirect()
+				->route('materials')
+				->withErrors($validator)
+				->withInput();
+		}
+		#upload image in public file
+		$name = $request->file('image')->getClientOriginalName();
+		$file_name = $request->file('image')->hashName();
+		$path = $request->file('image')->store('public/uploads/materials');
+		$file = File::create(['name' => $name, 'path' => $file_name]);
+		###
+		$data = request(['subject', 'description', 'url', 'type', 'level', 'keywords']);
+		$data['image_id'] = $file->id;
+        $data['u_id'] = Auth::id();
+		$material = MaterialRequest::create($data);
+		if($material)
+		{
+			return redirect()
+				->route('materials')
+				->with('message', 'Successfully sent a material '. $request->subject);
+		}
     }
 }
