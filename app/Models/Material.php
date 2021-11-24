@@ -29,4 +29,11 @@ class Material extends Model
 	public function image(){
         return $this->belongsTo(File::class, 'image_id');
     }
+	protected static function boot() {
+		parent::boot();
+		
+        static::deleting(function ($material) {
+            File::find($material->image_id)->delete();
+        });
+    }
 }

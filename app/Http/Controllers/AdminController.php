@@ -297,12 +297,80 @@ class AdminController extends Controller
         foreach($materials as $material)
         {
             $material['updated'] = Carbon::parse($material->updated_at)->diffForHumans();
+			$material['user'] = User::find($material->u_id);
         }
         //limit pages
         if ( $request->page > ($materials->lastPage()) )
         {
             abort(404);
         }
-		return view('admin.materials.materialTable', ['materials' => $materials]);
+		return view('admin.materials.materialTable', ['materials' => $materials, 'materialRequest' => true]);
+	}
+	public function showMaterialRequest(String $id, Request $request)
+	{
+		$material = MaterialRequest::with('typeRow')->with('image')->with('levelRow')->findOrFail($id);
+		if($material){
+			$user = User::find($material->u_id);
+			return view('admin.materials.edit', ['material' => $material, 'types' => MaterialsTypes::all(), 'levels' => Level::all(), 'user' => $user, 'materialRequest' => true]);
+		}
+	}
+	public function DeleteMaterialRequest(Request $request)
+	{
+		$material = MaterialRequest::findOrFail($request->id);
+		if($material)
+		{
+			$material->delete();
+			return redirect()
+				->route('admin')
+				->with('message', 'Successfully deleted a material request '.$material->subject);
+		}else{
+			return redirect()
+				->route('admin');
+		}
+	}
+	public function PublishMaterialRequest(Request $request)
+	{
+		$materialRequest = MaterialRequest::findOrFail($request->id);
+		$validator = Validator::make($request->all(), [
+			'subject' => 'required|string',
+			'description' => 'required|string',
+			'url' => 'required|url',
+			'type' => 'required|numeric',
+			'level' => 'required|numeric',
+			'keywords' => 'nullable|string',
+			'image' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+		]);
+		if($validator->fails())
+		{
+			return redirect()
+				->route('admin')
+				->withErrors($validator)
+				->withInput();
+		}
+		#upload image in public file
+		if($request->file('image'))
+		{
+			$name = $request->file('image')->getClientOriginalName();
+			$file_name = $request->file('image')->hashName();
+			$path = $request->file('image')->store('public/uploads/materials');
+			$file = File::create(['name' => $name, 'path' => $file_name]);
+			$image_value = $file->id;
+		}else{
+			$image_value = $materialRequest->image_id;
+			$file_name = File::find($image_value)->name;
+		}
+		###
+		$data = request(['subject', 'description', 'url', 'type', 'level', 'keywords']);
+		$data['image_id'] = $image_value;
+		$material = Material::create($data);
+		if($material)
+		{
+			$discordMsg = new DiscordWebhook();
+			$materialRequest->delete();
+			$discordMsg->SendNotification("We Added ".$material->subject, $material->description, url("/Materials/{$material->id}"), $material->typeRow->name, $material->levelRow->name, asset('storage/uploads/materials/'.$file_name));
+			return redirect()
+				->route('admin')
+				->with('message', 'Successfully created a material '. $request->subject);
+		}
 	}
 }

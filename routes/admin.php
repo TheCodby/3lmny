@@ -26,6 +26,9 @@ Route::prefix('Materials')->group(function () {
     Route::get('Fetch', [AdminController::class, 'getMaterialsPerPage']);
 	Route::get('Filter', [AdminController::class, 'filterMaterials']);
     Route::get('Requests', [AdminController::class, 'showRequests']);
+    Route::get('Request/{id}', [AdminController::class, 'showMaterialRequest'])->name('material.request');
+    Route::get('Request/Delete/{id}', [AdminController::class, 'DeleteMaterialRequest'])->name('material.request.delete');
+    Route::post('Request/Publish/{id}', [AdminController::class, 'PublishMaterialRequest'])->name('material.request.publish');
 });
 Route::prefix('Contacts')->group(function () {
     Route::get('Fetch', [AdminController::class, 'getMessagesPerPage']);

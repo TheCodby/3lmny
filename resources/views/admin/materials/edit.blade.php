@@ -23,9 +23,12 @@
                 </div>
                 @endif
                 <div class="card mb-3">
-                    <div class="card-header fs-4">Edit Material #{{$material->id}}</div>
+                    <div class="card-header fs-4">@if(isset($materialRequest)) Material Request @else Edit Material @endif #{{$material->id}}</div>
                     <div class="card-body">
-                        <form method='POST' action="{{route('admin.materials.edit', $material->id)}}" enctype="multipart/form-data">
+                        @if(isset($user))
+                            <p class="card-text">Requested by <a href="{{route('profile', $user->id)}}">#{{$user->id}} {{$user->username}}</a></p>
+                        @endif
+                        <form method='POST' action="@if(isset($materialRequest)) {{route('material.request.publish', $material->id)}} @else {{route('admin.materials.edit', $material->id)}} @endif" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-md-8">
@@ -94,7 +97,12 @@
                                 </div>
                             </div>
                             <div class="d-flex justify-content-center mt-2">
-                                    <button type='submit' class="btn btn-primary">Edit</button>
+                                    @if(isset($materialRequest))
+                                        <button type='submit' class="btn btn-success mx-1">Publish</button>
+                                        <a href='{{route("material.request.delete", $material->id)}}' class='btn btn-outline-danger'>Delete</a>
+                                    @else
+                                        <button type='submit' class="btn btn-primary">Edit</button>
+                                    @endif
                             </div>
                         </form>
                     </div>

@@ -27,7 +27,7 @@
 						<div class="col-6">
 							<label for="level" class="form-label">Level</label>
 							<select name='level' id='level' class="form-select" aria-label="All">
-							  <option selected>All</option>
+							  <option selected>Choose Level</option>
 							  <?php $__currentLoopData = $levels; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $level): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 							  	<option value="<?php echo e($level->id); ?>"><?php echo e($level->name); ?></option>
 							  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

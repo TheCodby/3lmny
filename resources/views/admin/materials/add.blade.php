@@ -27,7 +27,7 @@
 						<div class="col-6">
 							<label for="level" class="form-label">Level</label>
 							<select name='level' id='level' class="form-select" aria-label="All">
-							  <option selected>All</option>
+							  <option selected>Choose Level</option>
 							  @foreach($levels as $level)
 							  	<option value="{{$level->id}}">{{$level->name}}</option>
 							  @endforeach
